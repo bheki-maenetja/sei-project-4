@@ -2,7 +2,10 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
-from cards.models import PlayingCard
+
+from cards.models import PlayingCard, CardPowerLevel, CardPriceBracket
+from heroes.models import Hero
+from cardCollections.models import CardCollection, CollectionPowerLevel, CollectionPriceBracket
 # import django.contrib.auth.password_validation as validations
 # from django.core.exceptions import ValidationError
 User = get_user_model()
@@ -34,13 +37,42 @@ class UserSerializer(serializers.ModelSerializer):
     fields = '__all__'
 
 # Foreign Serializers
-class CardSerializer(serializers.ModelSerializer):
+class CardPowerLevelSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = CardPowerLevel
+    fields = '__all__'
 
+class CardPriceBracketSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = CardPriceBracket
+    fields = '__all__'
+
+class CollectionPowerLevelSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = CollectionPowerLevel
+    fields = '__all__'
+
+class CollectionPriceBracketSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = CollectionPriceBracket
+    fields = '__all__'
+
+class CardSerializer(serializers.ModelSerializer):
+  level = CardPowerLevelSerializer()
+  price_bracket = CardPriceBracketSerializer()
   class Meta:
     model = PlayingCard
-    fields = ('id', 'name', 'image', 'intelligence', 'strength', 'durability', 'speed', 'power', 'combat', 'overall', 'price')
+    fields = ('id', 'name', 'image', 'overall', 'level', 'price_bracket')
+
+class CollectionSerializer(serializers.ModelSerializer):
+  avg_level = CollectionPowerLevelSerializer()
+  price_bracket = CollectionPriceBracketSerializer()
+  class Meta:
+    model = CardCollection
+    exclude = ('owner', 'cards')
 
 # Populated Native Serializers
 class PopulatedUserSerializer(UserSerializer):
   cards = CardSerializer(many=True)
+  collections = CollectionSerializer(many=True)
   
