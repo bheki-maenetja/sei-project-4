@@ -1,3 +1,5 @@
+# pylint: disable=no-member
+
 from django.db import models
 from django.contrib.auth import get_user_model
 from heroes.models import Hero
@@ -9,7 +11,7 @@ class CardPowerLevel(models.Model):
   power_level = models.IntegerField(unique=True)
 
   def __str__(self):
-    return f'{self.name} - (Level {self.power_level}'
+    return f'{self.name} (Level {self.power_level})'
 
 class CardPriceBracket(models.Model):
   name = models.CharField(max_length=50, unique=True)
@@ -33,3 +35,6 @@ class PlayingCard(models.Model):
   level = models.ForeignKey(CardPowerLevel, related_name='cards', null=True, on_delete=models.DO_NOTHING)
   price = models.IntegerField(default=0)
   price_bracket = models.ForeignKey(CardPriceBracket, related_name='cards', null=True, on_delete=models.DO_NOTHING)
+
+  def __str__(self):
+    return f'{self.name} (Id: {self.id})'

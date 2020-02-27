@@ -5,7 +5,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_404_NOT_FOUND, HTTP_200_OK, HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTITY
-from .serializers import CardCollectionSerializer, PowerLevelSerializer, PriceBracketSerializer
+from .serializers import CardCollectionSerializer, PowerLevelSerializer, PriceBracketSerializer, PopulatedCollectionSerializer
 
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
@@ -17,7 +17,7 @@ class SingleCollection(APIView):
   def get(self, _request, pk):
     try:
       my_collection = CardCollection.objects.get(pk=pk)
-      serial_collection = CardCollectionSerializer(my_collection)
+      serial_collection = PopulatedCollectionSerializer(my_collection)
       return Response(serial_collection.data, status=HTTP_200_OK)
     except CardCollection.DoesNotExist:
       return Response({'message: Collection not found'}, status=HTTP_404_NOT_FOUND)
@@ -31,7 +31,7 @@ class ManyCollections(APIView):
 
   def get(self, _request):
     my_collections = CardCollection.objects.all()
-    serial_collections = CardCollectionSerializer(my_collections, many=True)
+    serial_collections = PopulatedCollectionSerializer(my_collections, many=True)
     return Response(serial_collections.data, status=HTTP_200_OK)
   
   def post(self, request):

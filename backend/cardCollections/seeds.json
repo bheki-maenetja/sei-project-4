@@ -1,0 +1,150 @@
+[
+{
+  "model": "cardCollections.collectionpowerlevel",
+  "pk": 1,
+  "fields": {
+    "name": "Street Fighters",
+    "power_level": 1
+  }
+},
+{
+  "model": "cardCollections.collectionpowerlevel",
+  "pk": 2,
+  "fields": {
+    "name": "Vigilantes",
+    "power_level": 2
+  }
+},
+{
+  "model": "cardCollections.collectionpowerlevel",
+  "pk": 3,
+  "fields": {
+    "name": "Enhanced Beings",
+    "power_level": 3
+  }
+},
+{
+  "model": "cardCollections.collectionpowerlevel",
+  "pk": 4,
+  "fields": {
+    "name": "Titans",
+    "power_level": 4
+  }
+},
+{
+  "model": "cardCollections.collectionpowerlevel",
+  "pk": 5,
+  "fields": {
+    "name": "Gods",
+    "power_level": 5
+  }
+},
+{
+  "model": "cardCollections.collectionpowerlevel",
+  "pk": 6,
+  "fields": {
+    "name": "Empty",
+    "power_level": 0
+  }
+},
+{
+  "model": "cardCollections.collectionpricebracket",
+  "pk": 1,
+  "fields": {
+    "name": "Worthless",
+    "value": 0
+  }
+},
+{
+  "model": "cardCollections.collectionpricebracket",
+  "pk": 2,
+  "fields": {
+    "name": "Bronze",
+    "value": 1
+  }
+},
+{
+  "model": "cardCollections.collectionpricebracket",
+  "pk": 3,
+  "fields": {
+    "name": "Silver",
+    "value": 2
+  }
+},
+{
+  "model": "cardCollections.collectionpricebracket",
+  "pk": 4,
+  "fields": {
+    "name": "Gold",
+    "value": 3
+  }
+},
+{
+  "model": "cardCollections.collectionpricebracket",
+  "pk": 5,
+  "fields": {
+    "name": "Platinum",
+    "value": 4
+  }
+},
+{
+  "model": "cardCollections.collectionpricebracket",
+  "pk": 6,
+  "fields": {
+    "name": "Diamond",
+    "value": 5
+  }
+},
+{
+  "model": "cardCollections.cardcollection",
+  "pk": 5,
+  "fields": {
+    "name": "The Avengers",
+    "image": "avenge.jpg",
+    "value": 0,
+    "avg_overall": 0,
+    "owner": 1,
+    "avg_level": 1,
+    "price_bracket": 4
+  }
+},
+{
+  "model": "cardCollections.cardcollection",
+  "pk": 6,
+  "fields": {
+    "name": "The Justice League",
+    "image": "justice.png",
+    "value": 0,
+    "avg_overall": 0,
+    "owner": 1,
+    "avg_level": 5,
+    "price_bracket": 5
+  }
+},
+{
+  "model": "cardCollections.cardcollection",
+  "pk": 7,
+  "fields": {
+    "name": "Guardians of the Galaxy",
+    "image": "quill.gif",
+    "value": 0,
+    "avg_overall": 0,
+    "owner": 1,
+    "avg_level": 6,
+    "price_bracket": 1
+  }
+},
+{
+  "model": "cardCollections.cardcollection",
+  "pk": 8,
+  "fields": {
+    "name": "The Suicide Squad",
+    "image": "suicide.lp",
+    "value": 0,
+    "avg_overall": 0,
+    "owner": 1,
+    "avg_level": 6,
+    "price_bracket": 1
+  }
+}
+]

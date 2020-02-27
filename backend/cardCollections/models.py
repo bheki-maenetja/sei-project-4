@@ -25,6 +25,7 @@ class CardCollection(models.Model):
   owner = models.ForeignKey(User, related_name='collections', null=False, on_delete=models.CASCADE)
   avg_level = models.ForeignKey(CollectionPowerLevel, related_name='collections', null=True, on_delete=models.DO_NOTHING)
   price_bracket = models.ForeignKey(CollectionPriceBracket, related_name='collections', null=True, on_delete=models.DO_NOTHING)
+  cards = models.ManyToManyField('cards.PlayingCard', related_name='collections', blank=True)
 
   def __str__(self):
     return f'{self.name} ({self.owner})'

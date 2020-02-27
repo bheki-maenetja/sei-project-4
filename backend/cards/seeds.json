@@ -1,0 +1,82 @@
+[
+  {
+    "model": "cards.cardpowerlevel",
+    "pk": 1,
+    "fields": {
+      "name": "Street Fighter",
+      "power_level": 1
+    }
+  },
+  {
+    "model": "cards.cardpowerlevel",
+    "pk": 2,
+    "fields": {
+      "name": "Vigilante",
+      "power_level": 2
+    }
+  },
+  {
+    "model": "cards.cardpowerlevel",
+    "pk": 3,
+    "fields": {
+      "name": "Enhanced Being",
+      "power_level": 3
+    }
+  },
+  {
+    "model": "cards.cardpowerlevel",
+    "pk": 4,
+    "fields": {
+      "name": "Titan",
+      "power_level": 4
+    }
+  },
+  {
+    "model": "cards.cardpowerlevel",
+    "pk": 5,
+    "fields": {
+      "name": "God",
+      "power_level": 5
+    }
+  },
+  {
+    "model": "cards.cardpricebracket",
+    "pk": 1,
+    "fields": {
+      "name": "Bronze",
+      "value": 1
+    }
+  },
+  {
+    "model": "cards.cardpricebracket",
+    "pk": 2,
+    "fields": {
+      "name": "Silver",
+      "value": 2
+    }
+  },
+  {
+    "model": "cards.cardpricebracket",
+    "pk": 3,
+    "fields": {
+      "name": "Gold",
+      "value": 3
+    }
+  },
+  {
+    "model": "cards.cardpricebracket",
+    "pk": 4,
+    "fields": {
+      "name": "Platinum",
+      "value": 4
+    }
+  },
+  {
+    "model": "cards.cardpricebracket",
+    "pk": 5,
+    "fields": {
+      "name": "Diamond",
+      "value": 5
+    }
+  }
+]
