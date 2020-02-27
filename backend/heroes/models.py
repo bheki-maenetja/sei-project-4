@@ -14,4 +14,4 @@ class Hero(models.Model):
   affiliations = models.CharField(max_length=1000, null=True)
 
   def __str__(self):
-    return f'{self.name} - ({self.full_name})'
+    return f'{self.name} ({self.full_name})'
