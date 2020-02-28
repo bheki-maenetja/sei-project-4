@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.status import HTTP_404_NOT_FOUND, HTTP_200_OK, HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTITY, HTTP_406_NOT_ACCEPTABLE
+from rest_framework.status import HTTP_404_NOT_FOUND, HTTP_200_OK, HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTITY, HTTP_406_NOT_ACCEPTABLE, HTTP_202_ACCEPTED
 from .serializers import PlayingCardSerializer, PowerLevelSerializer, PriceBracketSerializer, PopulatedCardSerializer, UserSerializer
 
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
@@ -25,6 +25,59 @@ class SingleCard(APIView):
       return Response(serial_card.data, status=HTTP_200_OK)
     except PlayingCardSerializer.DoesNotExist:
       return Response({'message: Card not found'}, status=HTTP_404_NOT_FOUND)
+
+## Level-Up
+class LevelUpCard(APIView):
+  
+  def update_stats(self, card_dict):
+    base_prices = {1: 100, 2: 200, 3: 400, 4: 800, 5: 1600}
+
+    intelligence = card_dict['intelligence']
+    strength = card_dict['strength']
+    durability = card_dict['durability']
+    speed = card_dict['speed']
+    combat = card_dict['combat']
+    power = card_dict['power']
+
+    overall = int((intelligence + strength + durability + speed + combat + power) / 6)
+
+    if overall >= 90: power_level = 5
+    elif 90 > overall >= 70: power_level = 4
+    elif 70 > overall >= 50: power_level = 3
+    elif 50 > overall >= 30: power_level = 2
+    else: power_level = 1
+
+    price = base_prices[power_level] + (5 * max([intelligence, strength, durability, speed, combat, power]))
+
+    if price >= 2000: price_bracket = 5
+    elif 2000 > price >= 1500: price_bracket = 4
+    elif 1500 > price >= 1000: price_bracket = 3
+    elif 1000 > price >= 500: price_bracket = 2
+    else: price_bracket = 1
+
+    power_level = CardPowerLevel.objects.get(power_level=power_level).id
+    price_bracket = CardPriceBracket.objects.get(value=price_bracket).id
+
+    card_dict.update({
+      'level': power_level,
+      'price_bracket': price_bracket,
+      'overall': overall,
+      'price': price
+    })
+
+    return card_dict
+
+  def put(self, request, pk):
+    chosen_card = PlayingCard.objects.get(pk=pk)
+    card_data = PlayingCardSerializer(chosen_card).data
+
+    card_data.update(request.data)
+    card_data = self.update_stats(card_data)
+    updated_card = PlayingCardSerializer(chosen_card, data=card_data)
+    if updated_card.is_valid():
+      updated_card.save()
+      return Response(updated_card.data, status=HTTP_202_ACCEPTED)
+    return Response({'message: SOMETHING IS VERY WRONG!!!'}, HTTP_406_NOT_ACCEPTABLE)
 
 ## Card Transactions
 class BuySingleCard(APIView):
@@ -53,6 +106,8 @@ class BuySingleCard(APIView):
       if updated_card.is_valid():
         updated_card.save()
       return Response(updated_card.data, status=HTTP_200_OK)
+    
+    return Response({'message: SOMETHING IS VERY WRONG!!!'}, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
 class SellSingleCard(APIView):
 
