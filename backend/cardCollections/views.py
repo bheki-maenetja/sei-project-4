@@ -2,16 +2,19 @@
 
 from django.shortcuts import render
 from django.shortcuts import render
+from django.contrib.auth import get_user_model
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_404_NOT_FOUND, HTTP_200_OK, HTTP_201_CREATED, HTTP_202_ACCEPTED, HTTP_422_UNPROCESSABLE_ENTITY, HTTP_406_NOT_ACCEPTABLE, HTTP_401_UNAUTHORIZED, HTTP_204_NO_CONTENT
-from .serializers import CardCollectionSerializer, PowerLevelSerializer, PriceBracketSerializer, PopulatedCollectionSerializer
+from .serializers import CardCollectionSerializer, PowerLevelSerializer, PriceBracketSerializer, PopulatedCollectionSerializer, UserSerializer, PlayingCardSerializer, PlayingCardTransactionSerializer
 
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 from .models import CardCollection, CollectionPowerLevel, CollectionPriceBracket
 from cards.models import PlayingCard
+
+User = get_user_model()
 
 # Views -- Card Collections
 class SingleCollection(APIView):
@@ -88,8 +91,6 @@ class AddCardToCollection(APIView):
 
     return coll_dict
 
-## Collection Transactions
-
   def put(self, request, pk):
     chosen_collection = CardCollection.objects.get(pk=pk)
     collection_data = CardCollectionSerializer(chosen_collection).data
@@ -111,6 +112,77 @@ class AddCardToCollection(APIView):
       return Response(updated_collection.data, status=HTTP_202_ACCEPTED)
 
     return Response({'message: SOMETHING IS VERY WRONG!!!'}, status=HTTP_406_NOT_ACCEPTABLE)
+
+## Collection Transactions
+class BuyCollection(APIView):
+
+  permission_classes = (IsAuthenticated, )
+
+  def put(self, request, pk):
+    buyer = User.objects.get(pk=request.user.id)
+    buyer_data = UserSerializer(buyer).data
+
+    chosen_collection = CardCollection.objects.get(pk=pk)
+    collection_data = CardCollectionSerializer(chosen_collection).data
+
+    if buyer.coins >= chosen_collection.value and chosen_collection.owner.id != request.user.id:
+      buyer_data['coins'] -= chosen_collection.value
+      collection_data['owner'] = buyer.id
+      for cardId in collection_data['cards']:
+        new_card = PlayingCard.objects.get(pk=cardId)
+        new_card_data = PlayingCardTransactionSerializer(new_card).data
+        new_card_data['owner'] = buyer.id 
+        updated_card = PlayingCardTransactionSerializer(new_card, data=new_card_data)
+        if updated_card.is_valid(): updated_card.save()
+        else: print('Card not updating')
+    elif chosen_collection.owner.id == request.user.id:
+      return Response({'message': 'You already have this collection'}, status=HTTP_200_OK)
+    else:
+      return Response({'message': 'You can\'t afford that mate'})
+    
+    updated_buyer = UserSerializer(buyer, data=buyer_data)
+    updated_collection = CardCollectionSerializer(chosen_collection, data=collection_data)
+    
+    if updated_buyer.is_valid():
+      updated_buyer.save()
+      if updated_collection.is_valid():
+        updated_collection.save()
+      return Response(updated_collection.data, status=HTTP_202_ACCEPTED)
+    return Response({'message': 'SOMETHING IS VERY WRONG!!!'}, status=HTTP_406_NOT_ACCEPTABLE)
+
+class SellCollection(APIView):
+  
+  permission_classes = (IsAuthenticated, )
+
+  def put(self, request, pk):
+    admin = User.objects.get(username='admin')
+    seller = User.objects.get(pk=request.user.id)
+    seller_data = UserSerializer(seller).data
+
+    chosen_collection = CardCollection.objects.get(pk=pk)
+    collection_data = CardCollectionSerializer(chosen_collection).data
+
+    if collection_data['owner'] == seller.id: seller_data['coins'] += collection_data['value']
+    collection_data['owner'] = admin.id 
+
+    for cardId in collection_data['cards']:
+      new_card = PlayingCard.objects.get(pk=cardId)
+      new_card_data = PlayingCardTransactionSerializer(new_card).data
+      new_card_data['owner'] = admin.id 
+      updated_card = PlayingCardTransactionSerializer(new_card, data=new_card_data)
+      if updated_card.is_valid(): updated_card.save()
+      else: print('Card not updating')
+    
+    updated_seller = UserSerializer(seller, data=seller_data)
+    updated_collection = CardCollectionSerializer(chosen_collection, data=collection_data)
+
+    if updated_seller.is_valid():
+      updated_seller.save()
+      if updated_collection.is_valid():
+        updated_collection.save()
+      return Response(updated_seller.data, status=HTTP_202_ACCEPTED)
+    
+    return Response({'message': 'SOMETHING IS VERY WRONG!!!'}, status=HTTP_406_NOT_ACCEPTABLE)
 
 class ManyCollections(APIView):
 

@@ -30,7 +30,7 @@ class UserSerializer(serializers.ModelSerializer):
 
   class Meta:
     model = User
-    fields = ('id', 'username', 'email', 'alias', )
+    fields = ('id', 'username', 'email', 'alias', 'coins')
 
 class CardPowerLevelSerializer(serializers.ModelSerializer):
   class Meta:
@@ -53,6 +53,12 @@ class PlayingCardSerializer(serializers.ModelSerializer):
   price_bracket = CardPriceBracketSerializer()
   hero = HeroSerializer()
   owner = UserSerializer()
+
+  class Meta:
+    model = PlayingCard
+    fields = '__all__'
+
+class PlayingCardTransactionSerializer(serializers.ModelSerializer):
 
   class Meta:
     model = PlayingCard
