@@ -7,5 +7,5 @@ class User(AbstractUser):
   alias = models.CharField(max_length=20, default='')
   email = models.CharField(max_length=40, unique=True)
   profile_image = models.CharField(max_length=500)
-  coins = models.IntegerField(default=0)
+  coins = models.IntegerField(default=500)
   xp = models.IntegerField(default=0)

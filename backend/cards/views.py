@@ -1,12 +1,12 @@
 # pylint: disable=no-member
-
+import json
 from django.shortcuts import render
 from django.shortcuts import render
 from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.status import HTTP_404_NOT_FOUND, HTTP_200_OK, HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTITY
-from .serializers import PlayingCardSerializer, PowerLevelSerializer, PriceBracketSerializer, PopulatedCardSerializer
+from rest_framework.status import HTTP_404_NOT_FOUND, HTTP_200_OK, HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTITY, HTTP_406_NOT_ACCEPTABLE
+from .serializers import PlayingCardSerializer, PowerLevelSerializer, PriceBracketSerializer, PopulatedCardSerializer, UserSerializer
 
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
@@ -25,9 +25,61 @@ class SingleCard(APIView):
       return Response(serial_card.data, status=HTTP_200_OK)
     except PlayingCardSerializer.DoesNotExist:
       return Response({'message: Card not found'}, status=HTTP_404_NOT_FOUND)
-  
+
+## Card Transactions
+class BuySingleCard(APIView):
+
+  permission_classes = (IsAuthenticatedOrReadOnly, )
+
   def put(self, request, pk):
-    pass
+    buyer = User.objects.get(pk=request.user.id)
+    buyer_data = UserSerializer(buyer).data
+
+    chosen_card = PlayingCard.objects.get(pk=pk)
+    card_data = PlayingCardSerializer(chosen_card).data
+
+    if buyer_data['coins'] >= card_data['price'] and card_data['owner'] != buyer.id:
+      buyer_data['coins'] -= card_data['price']
+      card_data['owner'] = buyer.id
+    elif card_data['owner'] == buyer.id:
+      return Response({'message: You already own that card'}, status=HTTP_200_OK)
+    else: 
+      return Response({'message: You can\'t afford that mate'}, status=HTTP_406_NOT_ACCEPTABLE)
+    
+    updated_buyer = UserSerializer(buyer, data=buyer_data)
+    updated_card = PlayingCardSerializer(chosen_card, data=card_data)
+    if updated_buyer.is_valid(): 
+      updated_buyer.save()
+      if updated_card.is_valid():
+        updated_card.save()
+      return Response(updated_card.data, status=HTTP_200_OK)
+
+class SellSingleCard(APIView):
+
+  permission_classes = (IsAuthenticatedOrReadOnly, )
+
+  def put(self, request, pk):
+    admin = User.objects.get(username='admin')
+    seller = User.objects.get(pk=request.user.id)
+    seller_data = UserSerializer(seller).data
+
+    chosen_card = PlayingCard.objects.get(pk=pk)
+    card_data = PlayingCardSerializer(chosen_card).data
+
+    if card_data['owner'] == seller.id: seller_data['coins'] += card_data['price']
+    card_data['owner'] = admin.id
+
+    updated_seller = UserSerializer(seller, data=seller_data)
+    updated_card = PlayingCardSerializer(chosen_card, data=card_data)
+
+    if updated_card.is_valid():
+      updated_card.save()
+      if updated_seller.is_valid():
+        updated_seller.save()
+      return Response(updated_seller.data, status=HTTP_200_OK)
+
+    return Response({'message: SOMETHING IS VERY WRONG!!!'}, status=HTTP_422_UNPROCESSABLE_ENTITY)
+
 
 class ManyCards(APIView):
 
