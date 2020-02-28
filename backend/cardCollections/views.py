@@ -4,12 +4,13 @@ from django.shortcuts import render
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.status import HTTP_404_NOT_FOUND, HTTP_200_OK, HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTITY
+from rest_framework.status import HTTP_404_NOT_FOUND, HTTP_200_OK, HTTP_201_CREATED, HTTP_202_ACCEPTED, HTTP_422_UNPROCESSABLE_ENTITY, HTTP_406_NOT_ACCEPTABLE
 from .serializers import CardCollectionSerializer, PowerLevelSerializer, PriceBracketSerializer, PopulatedCollectionSerializer
 
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 from .models import CardCollection, CollectionPowerLevel, CollectionPriceBracket
+from cards.models import PlayingCard
 
 # Views -- Card Collections
 class SingleCollection(APIView):
@@ -23,7 +24,39 @@ class SingleCollection(APIView):
       return Response({'message: Collection not found'}, status=HTTP_404_NOT_FOUND)
 
   def put(self, request, pk):
-    pass
+    chosen_collection = CardCollection.objects.get(pk=pk)
+    collection_data = CardCollectionSerializer(chosen_collection).data
+
+    collection_data.update(request.data)
+    updated_collection = CardCollectionSerializer(chosen_collection, data=collection_data)
+    if updated_collection.is_valid():
+      updated_collection.save()
+      return Response(updated_collection.data, status=HTTP_202_ACCEPTED)
+    return Response({'message: SOMETHING IS VERY WRONG!!!'}, status=HTTP_406_NOT_ACCEPTABLE)
+
+## Adding Cards to Collection
+class AddCardToCollection(APIView):
+  
+  def put(self, request, pk):
+    chosen_collection = CardCollection.objects.get(pk=pk)
+    collection_data = CardCollectionSerializer(chosen_collection).data
+
+    for cardId in request.data['cardIds']:
+      try:
+        chosen_card = PlayingCard.objects.get(pk=cardId)
+        if chosen_card.id not in collection_data['cards']:
+          collection_data['cards'].append(chosen_card.id)
+        elif chosen_card.id in collection_data['cards']:
+          collection_data['cards'].remove(chosen_card.id)
+      except chosen_card.DoesNotExist:
+        return Response({'message: Card not found'}, status=HTTP_404_NOT_FOUND)
+
+    updated_collection = CardCollectionSerializer(chosen_collection, data=collection_data)
+    if updated_collection.is_valid():
+      updated_collection.save()
+      return Response(updated_collection.data, status=HTTP_202_ACCEPTED)
+
+    return Response({'message: SOMETHING IS VERY WRONG!!!'}, status=HTTP_406_NOT_ACCEPTABLE)
 
 class ManyCollections(APIView):
 
