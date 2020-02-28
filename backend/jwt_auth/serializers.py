@@ -36,6 +36,12 @@ class UserSerializer(serializers.ModelSerializer):
     model = User
     fields = '__all__'
 
+class UpdateUserSerializer(serializers.ModelSerializer):
+
+  class Meta:
+    model = User
+    fields = ('first_name', 'last_name', 'alias', 'username', 'email', 'profile_image', 'coins', 'xp')
+
 # Foreign Serializers
 class CardPowerLevelSerializer(serializers.ModelSerializer):
   class Meta:

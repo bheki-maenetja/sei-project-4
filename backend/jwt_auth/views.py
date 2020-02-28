@@ -2,14 +2,14 @@ from datetime import datetime, timedelta
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied
-from rest_framework.status import HTTP_422_UNPROCESSABLE_ENTITY, HTTP_200_OK, HTTP_404_NOT_FOUND
+from rest_framework.status import HTTP_422_UNPROCESSABLE_ENTITY, HTTP_200_OK, HTTP_404_NOT_FOUND, HTTP_202_ACCEPTED, HTTP_406_NOT_ACCEPTABLE
 from django.contrib.auth import get_user_model
 from django.conf import settings
 import jwt
 
 from rest_framework.permissions import IsAuthenticated
 
-from .serializers import UserSerializer, PopulatedUserSerializer
+from .serializers import UserSerializer, UpdateUserSerializer, PopulatedUserSerializer
 User = get_user_model()
 
 class RegisterView(APIView):
@@ -53,3 +53,19 @@ class ProfileView(APIView):
       return Response(serialized_user.data, status=HTTP_200_OK)
     except User.DoesNotExist:
       return Response({'message': 'User not found'}, status=HTTP_404_NOT_FOUND)
+
+  def put(self, request):
+    try:
+      user = User.objects.get(pk=request.user.id)
+      user_data = UpdateUserSerializer(user).data
+    except User.DoesNotExist:
+      return Response({'message: User not found'}, status=HTTP_404_NOT_FOUND)
+
+    user_data.update(request.data)
+    updated_user = UpdateUserSerializer(user, data=user_data)
+    if updated_user.is_valid():
+      updated_user.save()
+      return Response(updated_user.data, HTTP_202_ACCEPTED)
+    print(updated_user.data)
+
+    return Response({'message: SOMETHING IS VERY WRONG!!!'}, status=HTTP_406_NOT_ACCEPTABLE)
