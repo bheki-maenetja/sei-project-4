@@ -1,3 +1,4 @@
+# pylint: disable=no-member
 from django.db import models
 from django.contrib.auth import get_user_model
 
@@ -28,4 +29,4 @@ class CardCollection(models.Model):
   cards = models.ManyToManyField('cards.PlayingCard', related_name='collections', blank=True)
 
   def __str__(self):
-    return f'{self.name} ({self.owner})'
+    return f'{self.name} (Owner: {self.owner}, Id: {self.id})'
