@@ -7,7 +7,7 @@ class Index extends React.Component {
 
   async componentDidMount() {
     try {
-      const res = await axios.get('/api/cards/')
+      const res = await axios.get('/api/heroes/')
       console.log(res.data)
     } catch(err) {
       console.log(err)

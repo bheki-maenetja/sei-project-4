@@ -1,11 +1,12 @@
 # pylint: disable=no-member
 import json
+import requests
 from django.shortcuts import render
 from django.shortcuts import render
 from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.status import HTTP_404_NOT_FOUND, HTTP_200_OK, HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTITY, HTTP_406_NOT_ACCEPTABLE, HTTP_202_ACCEPTED
+from rest_framework.status import HTTP_404_NOT_FOUND, HTTP_200_OK, HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTITY, HTTP_406_NOT_ACCEPTABLE, HTTP_202_ACCEPTED, HTTP_401_UNAUTHORIZED
 from .serializers import PlayingCardSerializer, PowerLevelSerializer, PriceBracketSerializer, PopulatedCardSerializer, UserSerializer
 
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
@@ -117,12 +118,17 @@ class SellSingleCard(APIView):
     admin = User.objects.get(username='admin')
     seller = User.objects.get(pk=request.user.id)
     seller_data = UserSerializer(seller).data
+    # return Response({'collectionIds': seller_data['collections']}, status=HTTP_200_OK)
 
     chosen_card = PlayingCard.objects.get(pk=pk)
     card_data = PlayingCardSerializer(chosen_card).data
 
     if card_data['owner'] == seller.id: seller_data['coins'] += card_data['price']
+    else: return Response({'message': 'UNAUTHORIZED!!! GET OUT OF HERE!!!'})
     card_data['owner'] = admin.id
+
+    for coll_Id in seller_data['collections']:
+      put_res = requests.put(url = f'http://localhost:8000/api/collections/{coll_Id}/remove-card/', json={'cardIds': [chosen_card.id]})
 
     updated_seller = UserSerializer(seller, data=seller_data)
     updated_card = PlayingCardSerializer(chosen_card, data=card_data)

@@ -37,14 +37,14 @@ class UserSerializer(serializers.ModelSerializer):
 
   class Meta:
     model = User
-    fields = ('id', 'username', 'email', 'alias', 'coins', 'xp')
+    fields = ('id', 'username', 'email', 'alias', 'coins', 'xp', 'collections')
 
 class CollectionSerializer(serializers.ModelSerializer):
 
   owner = UserSerializer()
   class Meta:
     model = CardCollection
-    exclude = ('cards', 'avg_level', 'price_bracket', )
+    exclude = ('cards', 'avg_level', 'price_bracket')
 
 # Populated Native Serializers
 class PopulatedCardSerializer(PlayingCardSerializer):
