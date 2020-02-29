@@ -1,24 +1,42 @@
 import React, { createContext } from 'react'
-import axios from 'axios'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-class Index extends React.Component {
+import 'bulma'
 
-  state = { data: [] }
+// Component Imports
+import UserAuth from './auth/UserAuth'
+import MyProfile from './users/MyProfile'
+import Home from './common/Home'
+import TitlePage from './common/TitlePage'
 
-  async componentDidMount() {
-    try {
-      const res = await axios.get('/api/heroes/')
-      console.log(res.data)
-    } catch(err) {
-      console.log(err)
-    }
-  }
+import HeroIndex from './heroes/HeroIndex'
+import HeroShow from './heroes/HeroShow'
 
-  render() {
-    return (
-      <h1>This is the index</h1>
-    )
-  }
-}
+import HeroCompare from './heroCompare/HeroCompare'
+import HeroBattle from './heroBattleGame/HeroBattle'
+
+import MarketPlace from './marketplace/MarketPlace'
+
+import ErrorPage from './common/ErrorPage'
+
+const Index = () => (
+  <BrowserRouter>
+    <>
+    <Switch>
+      <Route exact path="/" component={TitlePage} />
+      <Route path="/home" component={Home} />
+      <Route path="/login" component={UserAuth} />
+      <Route path="/register" component={UserAuth} />
+      <Route path="/my-profile" component={MyProfile} />
+      <Route path="/heroes/:id" component={HeroShow} />
+      <Route path="/heroes" component={HeroIndex} />
+      <Route path="/hero-compare" component={HeroCompare} />
+      <Route path="/hero-battle" component={HeroBattle} />
+      <Route path="/marketplace" component={MarketPlace} />
+      <Route path="/*" component={ErrorPage} />
+    </Switch>
+    </>
+  </BrowserRouter>
+)
 
 export default Index
