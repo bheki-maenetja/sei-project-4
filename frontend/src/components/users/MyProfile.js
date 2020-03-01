@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
 import Navbar from '../common/Navbar'
@@ -33,8 +34,6 @@ class MyProfile extends React.Component {
   render() {
     const { userInfo } = this.state
     if (!userInfo) return null
-    const { userCards, userCollections } = this.state
-    console.log(userCards, userCollections)
     return (
       <>
       <Navbar />
@@ -76,17 +75,6 @@ class MyProfile extends React.Component {
               </div>
             </div>
           </div>
-          {/* <div className="tabs is-centered is-large is-boxed is-fullwidth">
-            <ul>
-              <li className="is-active">
-                <a>My Cards</a>
-              </li>
-              <li>
-                <a>My Collections</a>
-              </li>
-            </ul>
-          </div> */}
-          {/* <iframe src='http://localhost:3000/heroes/' style={{height: '700px', width: '100%'}}></iframe> */}
           <Tabs 
             selectedIndex={this.state.tabIndex} 
             onSelect={tabIndex => this.setState({ tabIndex })}
@@ -105,8 +93,12 @@ class MyProfile extends React.Component {
               </li>
             </ul>
           </div>
-            <TabPanel><UserCardIndex /></TabPanel>
-            <TabPanel><UserCollectionIndex /></TabPanel>
+            <TabPanel>
+              {this.state.userCards.length !== 0 ? <UserCardIndex cardData={this.state.userCards} /> : <h1 className="subtitle is-6">No Cards yet. <Link to="/marketplace">Buy cards</Link></h1>}
+            </TabPanel>
+            <TabPanel>
+              {this.state.userCards.length !== 0 ? <UserCollectionIndex collectionData={this.state.userCollections} /> : <h1 className="subtitle is-6">No Collections yet. <Link to="/marketplace">Buy card packs</Link></h1>} 
+            </TabPanel>
           </Tabs>
         </div>
       </section>
