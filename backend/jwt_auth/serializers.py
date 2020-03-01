@@ -68,7 +68,21 @@ class CardSerializer(serializers.ModelSerializer):
   price_bracket = CardPriceBracketSerializer()
   class Meta:
     model = PlayingCard
-    fields = ('id', 'name', 'image', 'overall', 'level', 'price_bracket')
+    fields = (
+      'id', 
+      'name', 
+      'image', 
+      'intelligence', 
+      'strength', 
+      'combat', 
+      'power',
+      'speed',
+      'durability', 
+      'overall', 
+      'level',
+      'price', 
+      'price_bracket'
+    )
 
 class CollectionSerializer(serializers.ModelSerializer):
   avg_level = CollectionPowerLevelSerializer()

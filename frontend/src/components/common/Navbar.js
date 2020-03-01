@@ -41,7 +41,7 @@ class Navbar extends React.Component {
               <Link className="navbar-item" to="/hero-compare">Hero Compare</Link>
               <Link className="navbar-item" to="/hero-battle">Hero Battle</Link>
               <Link className="navbar-item" to="/marketplace">Marketplace</Link>
-              <Link className="navbar-item" to="/my-profile">My Account</Link>
+              <Link className="navbar-item" to="/my-profile">My Profile</Link>
               <Link className="navbar-item" to="/" onClick={this.logout}>Logout</Link>
             </div>
           </div>
