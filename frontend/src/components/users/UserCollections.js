@@ -3,7 +3,7 @@ import React from 'react'
 class UserCollectionIndex extends React.Component {
 
   render() {
-    const { collectionData } = this.props
+    const { collectionData, clickHandler } = this.props
     return (
       <>
       <section className="section">
@@ -12,7 +12,7 @@ class UserCollectionIndex extends React.Component {
             {collectionData.map(collection => {
               return (
                 <div className="column is-one-quarter-desktop is-one-third-tablet is-full-mobile" key={collection.id}>
-                  <div className="card">
+                  <div className="card" onClick={() => clickHandler(collection.id)}>
                     <div className="card-image">
                       <figure className="card-image">
                         <img src={collection.image} alt={collection.name} />

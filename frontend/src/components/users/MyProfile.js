@@ -4,18 +4,36 @@ import { Link } from 'react-router-dom'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
 import Navbar from '../common/Navbar'
+
 import UserCardIndex from './UserCards'
+import UserCardModal from './UserCardModals'
 import UserCollectionIndex from './UserCollections'
+import UserCollectionModal from './UserCollectionModals'
 
 import Authorize from '../../lib/authorize'
 
 class MyProfile extends React.Component {
   
   state = {
+    isModalOpen: false,
     tabIndex: 0,
     userInfo: null,
     userCards: null,
-    userCollections: null
+    userCollections: null,
+    currentCard: null,
+    currentCollection: null
+  }
+
+  setCurrentCard = (cardId) => {
+    this.setState({ currentCard: this.state.userCards.find(card => card.id === cardId), isModalOpen: true })
+  }
+
+  setCurrentCollection = (collectionId) => {
+    this.setState({ currentCollection: this.state.userCollections.find(coll => coll.id === collectionId), isModalOpen: true })
+  }
+
+  clearModal = () => {
+    this.setState({ currentCard: null, currentCollection: null, isModalOpen: false })
   }
 
   async componentDidMount() {
@@ -37,7 +55,7 @@ class MyProfile extends React.Component {
     return (
       <>
       <Navbar />
-      <section className="section">
+      <section className="section" style={{height: '93vh', overflowY: 'scroll'}}>
         <div className="container">
           <h1 className="title is-1 has-text-black">{userInfo.alias}</h1>
           <hr />
@@ -94,12 +112,19 @@ class MyProfile extends React.Component {
             </ul>
           </div>
             <TabPanel>
-              {this.state.userCards.length !== 0 ? <UserCardIndex cardData={this.state.userCards} /> : <h1 className="subtitle is-6">No Cards yet. <Link to="/marketplace">Buy cards</Link></h1>}
+              {this.state.userCards.length !== 0 ? <UserCardIndex cardData={this.state.userCards} clickHandler={this.setCurrentCard} /> : <h1 className="subtitle is-6">No Cards yet. <Link to="/marketplace">Buy cards</Link></h1>}
             </TabPanel>
             <TabPanel>
-              {this.state.userCards.length !== 0 ? <UserCollectionIndex collectionData={this.state.userCollections} /> : <h1 className="subtitle is-6">No Collections yet. <Link to="/marketplace">Buy card packs</Link></h1>} 
+              {this.state.userCards.length !== 0 ? <UserCollectionIndex collectionData={this.state.userCollections} clickHandler={this.setCurrentCollection} /> : <h1 className="subtitle is-6">No Collections yet. <Link to="/marketplace">Buy card packs</Link></h1>} 
             </TabPanel>
           </Tabs>
+          {this.state.isModalOpen && 
+            <div className="modal is-active">
+            <div className="modal-background" onClick={this.clearModal}></div>
+              {this.state.currentCard && <UserCardModal currentCard={this.state.currentCard} clearModal={this.clearModal} />}
+              {this.state.currentCollection && <UserCollectionModal currentColl={this.state.currentCollection} clearModal={this.clearModal} />}
+            </div>
+          }
         </div>
       </section>
       </>

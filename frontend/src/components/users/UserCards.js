@@ -3,7 +3,7 @@ import React from 'react'
 class UserCardIndex extends React.Component {
   
   render() {
-    const { cardData } = this.props
+    const { cardData, clickHandler } = this.props
     return (
       <>
       <section className="section">
@@ -12,7 +12,7 @@ class UserCardIndex extends React.Component {
             {cardData.map(card => {
               return (
                 <div className="column is-one-quarter-desktop is-one-third-tablet is-full-mobile" key={card.id}>
-                  <div className="card">
+                  <div className="card" onClick={() => clickHandler(card.id)}>
                     <div className="card-image">
                       <figure className="card-image">
                         <img src={card.image} alt={card.name} />
