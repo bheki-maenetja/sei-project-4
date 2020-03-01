@@ -78,7 +78,7 @@ class HeroCompare extends React.Component {
       <section className="section">
         <div className="container">
           <div className="container"></div>
-          <h1 className="title is-1">Compare Your Favourite Superheroes!!!</h1>
+          <h1 className="title is-1 has-text-centered">Compare Your Favourite Superheroes!!!</h1>
           <hr/>
           <div className="container has-text-centered">
             {!this.state.gameInPlay ? <button className="button is-info" onClick={this.findWinner}>Find the Winner</button> : <button className="button is-danger" onClick={this.resetPage}>Reset</button>}
