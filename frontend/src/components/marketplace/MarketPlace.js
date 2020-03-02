@@ -49,30 +49,71 @@ class MarketPlace extends React.Component {
     }
   }
 
-  clearModal = () => {
-    this.setState({ currentCard: null, currentCollection: null, isModalOpen: false })
+  refreshMarket = async () => {
+    try {
+      const res = await Promise.all([
+        axios.get('/api/cards/'),
+        axios.get('/api/collections/'),
+        axios.get('/api/users/my-profile', {
+          headers: {
+            Authorization: `Bearer ${Authorize.getToken()}`
+          }
+        })
+      ])
+      const allCards = res[0].data.filter(card => !card.owner || card.owner.username === 'admin')
+      const allCollections = res[1].data.filter(coll => coll.owner.username === 'admin')
+      this.setState({
+        isModalOpen: false,
+        tabIndex: 0,
+        cards: allCards,
+        searchCards: allCards,
+        collections: allCollections,
+        searchCollections: allCollections,
+        userInfo: res[2].data
+      })
+    } catch(err) {
+      console.log(err)
+    }
   }
 
+  
   setCurrentCard = (cardId) => {
     this.setState({ currentCard: this.state.searchCards.find(card => card.id === cardId), isModalOpen: true })
   }
 
+  buyCurrentCard = async (cardId) => {
+    try {
+      await axios.get(`/api/cards/${cardId}/buy/`, {
+        headers: {
+          Authorization: `Bearer ${Authorize.getToken()}`
+        }
+      })
+      this.refreshMarket()
+    } catch (err) {
+      console.log(err.response)
+    }
+  }
+  
   setCurrentCollection = (collectionId) => {
     this.setState({ currentCollection: this.state.searchCollections.find(coll => coll.id === collectionId), isModalOpen: true })
   }
-
+  
   basicCardSearch = (e) => {
     const searchString = e.target.value
     const { cards } = this.state
     const filteredCards = cards.filter(card => card.name.toLowerCase().includes(searchString.toLowerCase()))
     this.setState({ searchCards: filteredCards })
   }
-
+  
   basicCollectionSearch = (e) => {
     const searchString = e.target.value
     const { collections } = this.state
     const filteredCollections = collections.filter(coll => coll.name.toLowerCase().includes(searchString.toLowerCase()))
     this.setState({ searchCollections: filteredCollections })
+  }
+  
+  clearModal = () => {
+    this.setState({ currentCard: null, currentCollection: null, isModalOpen: false })
   }
 
   changeTabs = (tabIndex) => {
@@ -171,7 +212,13 @@ class MarketPlace extends React.Component {
           {isModalOpen && 
             <div className="modal is-active">
               <div className="modal-background" onClick={() => this.setState({ isModalOpen: false })}></div>
-              {currentCard && <MarketCardModal currentCard={currentCard} clearModal={this.clearModal} />}
+              {currentCard && 
+                <MarketCardModal 
+                  currentCard={currentCard} 
+                  clearModal={this.clearModal}
+                  buyHandler={this.buyCurrentCard}
+                />
+              }
               {currentCollection && <MarketCollectionModal currentColl={currentCollection} clearModal={this.clearModal} />}
             </div>
           }

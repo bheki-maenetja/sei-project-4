@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const MarketCardModal = ({ currentCard, clearModal }) => (
+const MarketCardModal = ({ currentCard, clearModal, buyHandler }) => (
   <>
   <div className="modal-card">
     <div className="modal-card-head">
@@ -65,7 +65,7 @@ const MarketCardModal = ({ currentCard, clearModal }) => (
       <p><strong>Market Value:</strong> <span>${currentCard.price} ({currentCard.price_bracket.name})</span></p>
     </div>
     <div className="modal-card-foot">
-      <button className="button modal-card-title is-info">Buy</button>
+      <button className="button modal-card-title is-info" onClick={() => buyHandler(currentCard.id)}>Buy</button>
       <Link to={`/heroes/${currentCard.hero.id}`}><button className="button modal-card-title is-primary">More Info</button></Link>
     </div>
   </div>
