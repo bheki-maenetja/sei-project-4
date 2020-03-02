@@ -120,7 +120,7 @@ class MyProfile extends React.Component {
           </Tabs>
           {this.state.isModalOpen && 
             <div className="modal is-active">
-            <div className="modal-background" onClick={this.clearModal}></div>
+              <div className="modal-background" onClick={this.clearModal}></div>
               {this.state.currentCard && <UserCardModal currentCard={this.state.currentCard} clearModal={this.clearModal} />}
               {this.state.currentCollection && <UserCollectionModal currentColl={this.state.currentCollection} clearModal={this.clearModal} />}
             </div>
