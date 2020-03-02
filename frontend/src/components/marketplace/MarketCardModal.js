@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const MarketCardModal = ({ currentCard, clearModal }) => (
   <>
@@ -65,6 +66,7 @@ const MarketCardModal = ({ currentCard, clearModal }) => (
     </div>
     <div className="modal-card-foot">
       <button className="button modal-card-title is-info">Buy</button>
+      <Link to={`/heroes/${currentCard.hero.id}`}><button className="button modal-card-title is-primary">More Info</button></Link>
     </div>
   </div>
   </>

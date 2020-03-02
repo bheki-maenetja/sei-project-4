@@ -36,7 +36,7 @@ class MarketPlace extends React.Component {
         })
       ])
       const allCards = res[0].data.filter(card => !card.owner || card.owner.username === 'admin')
-      const allCollections = res[1].data.filter(coll => coll.owner.username !== 'admin')
+      const allCollections = res[1].data.filter(coll => coll.owner.username === 'admin')
       this.setState({
         cards: allCards,
         searchCards: allCards,

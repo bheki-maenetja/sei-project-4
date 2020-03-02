@@ -1,6 +1,6 @@
 import React from 'react'
 
-const UserCardModal = ({ currentCard, clearModal }) => (
+const UserCardModal = ({ currentCard, clearModal, sellHandler }) => (
   <>
   <div className="modal-card">
     <div className="modal-card-head">
@@ -65,7 +65,7 @@ const UserCardModal = ({ currentCard, clearModal }) => (
     </div>
     <div className="modal-card-foot">
       <button className="button modal-card-title is-info">Add to Collection</button>
-      <button className="button modal-card-title is-warning">Sell</button>
+      <button className="button modal-card-title is-warning" onClick={() => sellHandler(currentCard.id)}>Sell</button>
     </div>
   </div>
   </>

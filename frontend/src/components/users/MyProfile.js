@@ -23,19 +23,7 @@ class MyProfile extends React.Component {
     currentCard: null,
     currentCollection: null
   }
-
-  setCurrentCard = (cardId) => {
-    this.setState({ currentCard: this.state.userCards.find(card => card.id === cardId), isModalOpen: true })
-  }
-
-  setCurrentCollection = (collectionId) => {
-    this.setState({ currentCollection: this.state.userCollections.find(coll => coll.id === collectionId), isModalOpen: true })
-  }
-
-  clearModal = () => {
-    this.setState({ currentCard: null, currentCollection: null, isModalOpen: false })
-  }
-
+  
   async componentDidMount() {
     try {
       const res = await axios.get('/api/users/my-profile/', {
@@ -47,6 +35,51 @@ class MyProfile extends React.Component {
     } catch (err) {
       console.log(err)
     }
+  }
+
+  refreshProfile = async () => {
+    try {
+      const res = await axios.get('/api/users/my-profile/', {
+        headers: {
+          Authorization: `Bearer ${Authorize.getToken()}`
+        }
+      })
+      this.setState({
+        isModalOpen: false,
+        userInfo: res.data, 
+        userCards: res.data.cards, 
+        userCollections: res.data.collections,
+        currentCard: null,
+        currentCollection: null
+      })
+    } catch (err) {
+      console.log(err.response)
+    }
+  }
+
+  setCurrentCard = (cardId) => {
+    this.setState({ currentCard: this.state.userCards.find(card => card.id === cardId), isModalOpen: true })
+  }
+
+  sellCurrentCard = async (cardId) => {
+    try {
+      await axios.get(`/api/cards/${cardId}/sell/`, {
+        headers: {
+          Authorization: `Bearer ${Authorize.getToken()}`
+        }
+      })
+      this.refreshProfile()
+    } catch (err) {
+      console.log(err.response)
+    }
+  }
+
+  setCurrentCollection = (collectionId) => {
+    this.setState({ currentCollection: this.state.userCollections.find(coll => coll.id === collectionId), isModalOpen: true })
+  }
+
+  clearModal = () => {
+    this.setState({ currentCard: null, currentCollection: null, isModalOpen: false })
   }
 
   render() {
@@ -121,8 +154,19 @@ class MyProfile extends React.Component {
           {this.state.isModalOpen && 
             <div className="modal is-active">
               <div className="modal-background" onClick={this.clearModal}></div>
-              {this.state.currentCard && <UserCardModal currentCard={this.state.currentCard} clearModal={this.clearModal} />}
-              {this.state.currentCollection && <UserCollectionModal currentColl={this.state.currentCollection} clearModal={this.clearModal} />}
+              {this.state.currentCard && 
+                <UserCardModal 
+                  currentCard={this.state.currentCard} 
+                  clearModal={this.clearModal} 
+                  sellHandler={this.sellCurrentCard} 
+                />
+              }
+              {this.state.currentCollection && 
+                <UserCollectionModal 
+                  currentColl={this.state.currentCollection} 
+                  clearModal={this.clearModal} 
+                />
+              }
             </div>
           }
         </div>
