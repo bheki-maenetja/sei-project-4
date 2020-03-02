@@ -80,7 +80,6 @@ class MarketPlace extends React.Component {
   }
 
   render() {
-    console.log(this.state.userInfo)
     const { searchCards, searchCollections, isModalOpen, currentCard, currentCollection, userInfo } = this.state
     return (
       <>

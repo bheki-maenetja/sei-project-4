@@ -1,15 +1,222 @@
 import React from 'react'
+import axios from 'axios'
+
+import Authorize from '../../lib/authorize'
+
 import Navbar from '../common/Navbar'
+import HeroSearchForm from '../heroCompare/HeroSearchForm'
 
 class HeroBattle extends React.Component {
   
-  state = {}
+  state = {
+    battleChallenges: [
+      {
+        name: 'Million Mile Dash',
+        description: 'Both heroes will race around the earth\'s equator 252 times. First to the finish wins!',
+        attributes: ['speed', 'durability']
+      },
+      {
+        name: '4D Chess',
+        description: 'Both heroes will play a game of chess on a 4-dimensional chessboard',
+        attributes: ['intelligence', 'speed']
+      },
+      {
+        name: 'Weight Lifting',
+        description: 'Both heroes will compete in a weight-lifting contest where they will have to bench and deadlift immensely heavy objects until somebody quits.',
+        attributes: ['strength', 'power', 'durability']
+      },
+      {
+        name: 'Arm Wrestling',
+        description: 'Pretty self-explanatory. Best of 3, winner takes all!',
+        attributes: ['strength', 'power']
+      },
+      {
+        name: 'Mortal Combat',
+        description: 'A battle to the death. Last man (or woman) standing wins.',
+        attributes: ['combat', 'intelligence', 'power']
+      },
+      {
+        name: 'Saving the Day',
+        description: 'An intergalactic superbeing (with an alien army) is attacking a populated city. Defeat this powerful foe and save as many lives as possible. This is the ultimate test of a superhero; whoever does the best job wins.',
+        attributes: ['overall']
+      }
+    ],
+    userInfo: null,
+    playerCards: [],
+    compCards: null,
+    playerChoice: [],
+    compChoice: null,
+    gameInPlay: false,
+    chosenChallenge: [],
+    winner: ''
+  }
+
+  async componentDidMount() {
+    try {
+      const res = await Promise.all([
+        axios.get('/api/cards/'),
+        axios.get('/api/users/my-profile/', {
+          headers: {
+            Authorization: `Bearer ${Authorize.getToken()}`
+          }
+        })
+      ])
+      const compCards = res[0].data.filter(card => !card.owner || card.owner.username === 'admin')
+      const playerCards = res[1].data.cards
+      this.setState({ userInfo: res[1].data, compCards, playerCards, playerChoice: playerCards[0] })
+    } catch(err) {
+      console.log(err)
+    }
+  }
+
+  handleChange = (e) => {
+    const heroChoice = this.state.playerCards.filter(item => item.id === parseInt(e.target.value))[0]
+    this.setState({ [e.target.name]: heroChoice })
+  }
+
+  getRandomHero = (e) => {
+    e.preventDefault()
+    const heroChoice = this.state.playerCards[Math.floor(Math.random() * this.state.playerCards.length)]
+    this.setState({ [e.target.name]: heroChoice })
+  }
+
+  getRandomCompCard = () => {
+    let compHero
+    const { playerChoice, compCards } = this.state
+    const viableHeroes = compCards.filter(card => Math.abs(card.overall - playerChoice.overall) <= 5 && card.name !== playerChoice.name )
+    if (viableHeroes.length > 0) compHero = viableHeroes[Math.floor(Math.random() * viableHeroes.length)]
+    else compHero = compCards[Math.floor(Math.random() * compCards.length)]
+    console.log(viableHeroes)
+    return compHero
+  }
+
+  setChallenge = () => {
+    const chosenChallenge = this.state.battleChallenges[Math.floor(Math.random() * this.state.battleChallenges.length)]
+    const compChoice = this.getRandomCompCard()
+    this.setState({ chosenChallenge, compChoice, gameInPlay: true })
+  }
+
+  findWinner = () => {
+    const { playerChoice, compChoice, chosenChallenge } = this.state
+    let playerTotal = 0
+    let compTotal = 0
+
+    chosenChallenge.attributes.map(attr => {
+      playerTotal += playerChoice[attr]
+      compTotal += compChoice[attr]
+    })
+
+    playerTotal /= chosenChallenge.attributes.length
+    compTotal /= chosenChallenge.attributes.length
+
+    if (playerTotal > compTotal) this.setState({ winner: 'playerChoice' })
+    else if (compTotal > playerTotal) this.setState({ winner: 'compChoice' })
+    else this.setState({ winner: 'Draw' })
+
+    console.log('Player:', playerTotal, 'Computer:', compTotal)
+  }
 
   render() {
+    console.log(this.state)
+    if (!this.state.playerChoice) return false
+    const { playerChoice, playerCards, gameInPlay, chosenChallenge, compChoice, winner } = this.state
     return (
       <>
       <Navbar />
-      <h1>Hero Battle!!!</h1>
+      <section className="section">
+        <div className="container">
+          <h1 className="title is-1 has-text-centered">SUPERHERO BATTLE</h1>
+          <h2 className="subtitle is-5 has-text-centered">Put your cards to the test in the ultimate battle of champions!</h2>
+          <hr />
+          {playerChoice.length !== 0 ?
+          <>
+          <div className="container has-text-centered">
+            {gameInPlay ? <button className="button is-danger" onClick={this.findWinner}>BATTLE!!!</button> : <button className="button is-info" onClick={this.setChallenge}>Start</button>}
+          </div>
+          <br />
+            <div className="columns is-vcentered">
+              <div className="column is-4">
+                {playerChoice.length !== 0 ? 
+                <>
+                  {!gameInPlay && 
+                    <>
+                    <HeroSearchForm 
+                      choiceObject={playerChoice}
+                      heroData={playerCards}
+                      handleChange={this.handleChange}
+                      name={'playerChoice'}
+                      getRandomHero={this.getRandomHero}
+                    />
+                    <br />
+                    </>
+                  }
+                  {gameInPlay && winner && 
+                    <h1 className="title is-1">{this.state.winner === 'playerChoice' ? 
+                    'Winner' : this.state.winner === 'compChoice' ? 'Loser' : 'Draw'}</h1>
+                  }
+                  <div className="card is-fullheight">
+                    <div className="card-image">
+                      <figure className="image is-squared">
+                        <img src={playerChoice.image} alt="something" />
+                      </figure>
+                    </div>
+                    <div className="card-content">
+                      <h2 className="title is-3">{playerChoice.name}</h2>
+                    </div>
+                  </div>
+                </>
+                : <h1>Loading playing cards...</h1>
+                }
+              </div>
+              <div className="column is-4">
+                <div className="container has-text-centered">
+                  {playerChoice.length !== 0 &&
+                  <>
+                    <h1 className="title is-1 has-text-centered">VS</h1>
+                    {chosenChallenge.attributes && 
+                      <div className="container">
+                        <h1 className="title is-4">{chosenChallenge.name}</h1>
+                        <p className="subtitle is-6">{chosenChallenge.description}</p>
+                        <p>Key Attributes: {chosenChallenge.attributes.join(', ')}</p>
+                      </div>
+                    }
+                  </>
+                  }
+                </div>
+              </div>
+              <div className="column is-4">
+                {playerChoice.length !== 0 &&
+                  <>
+                  {!gameInPlay && 
+                  <>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                  </>
+                  }
+                  {gameInPlay && winner && 
+                    <h1 className="title is-1">{this.state.winner === 'compChoice' ? 
+                    'Winner' : this.state.winner === 'playerChoice' ? 'Loser' : 'Draw'}</h1>
+                  }
+                  <div className="card is-fullheight">
+                    <div className="card-image">
+                      <figure className="image is-squared">
+                        <img src={compChoice ? compChoice.image : `https://previews.123rf.com/images/pixxart/pixxart1308/pixxart130800008/21326902-question-mark-in-pop-art-style.jpg`} alt="something" />
+                      </figure>
+                    </div>
+                    <div className="card-content">
+                      <h2 className="title is-3">{compChoice ? compChoice.name : 'Computer Choice'}</h2>
+                    </div>
+                  </div>
+                  </>             
+                }
+              </div>
+            </div>
+          </>
+          : <h1 className="title is-1">Setting the battlefield...</h1> }
+        </div>
+      </section>
       </>
     )
   }

@@ -10,8 +10,6 @@ class HeroCompare extends React.Component {
     data: [],
     firstChoice: null,
     secondChoice: null,
-    gotFirstChoice: false,
-    gotSecondChoice: false,
     gameInPlay: false,
     winner: ''
   }
@@ -69,7 +67,6 @@ class HeroCompare extends React.Component {
 
 
   render() {
-    console.log(this.state)
     if (!this.state.firstChoice) return false
     const { firstChoice, secondChoice } = this.state
     return (
@@ -77,7 +74,6 @@ class HeroCompare extends React.Component {
       <Navbar />
       <section className="section">
         <div className="container">
-          <div className="container"></div>
           <h1 className="title is-1 has-text-centered">Compare Your Favourite Superheroes!!!</h1>
           <hr/>
           <div className="container has-text-centered">

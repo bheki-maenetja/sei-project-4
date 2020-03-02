@@ -19,7 +19,7 @@ const HeroSearchForm = ({ heroData, handleChange, name, choiceObject, getRandomH
         </div>
         <div className="level-right">
           <div className="control">
-            <button className="button is-danger" name={name} onClick={getRandomHero}>Random</button>
+            <button className="button is-warning" name={name} onClick={getRandomHero}>Random</button>
           </div>
         </div>
       </div>
