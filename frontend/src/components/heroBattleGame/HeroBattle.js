@@ -5,6 +5,7 @@ import Authorize from '../../lib/authorize'
 
 import Navbar from '../common/Navbar'
 import HeroSearchForm from '../heroCompare/HeroSearchForm'
+import GameModal from './GameModal'
 
 class HeroBattle extends React.Component {
   
@@ -38,7 +39,7 @@ class HeroBattle extends React.Component {
       {
         name: 'Saving the Day',
         description: 'An intergalactic superbeing (with an alien army) is attacking a populated city. Defeat this powerful foe and save as many lives as possible. This is the ultimate test of a superhero; whoever does the best job wins.',
-        attributes: ['overall']
+        attributes: ['intelligence', 'power', 'durability', 'strength', 'speed', 'combat']
       }
     ],
     userInfo: null,
@@ -47,8 +48,11 @@ class HeroBattle extends React.Component {
     playerChoice: [],
     compChoice: null,
     gameInPlay: false,
+    isModalOpen: false,
     chosenChallenge: [],
-    winner: ''
+    winner: '',
+    playerWinnings: null,
+    cardLevelUp: null
   }
 
   async componentDidMount() {
@@ -86,7 +90,6 @@ class HeroBattle extends React.Component {
     const viableHeroes = compCards.filter(card => Math.abs(card.overall - playerChoice.overall) <= 5 && card.name !== playerChoice.name )
     if (viableHeroes.length > 0) compHero = viableHeroes[Math.floor(Math.random() * viableHeroes.length)]
     else compHero = compCards[Math.floor(Math.random() * compCards.length)]
-    console.log(viableHeroes)
     return compHero
   }
 
@@ -116,10 +119,40 @@ class HeroBattle extends React.Component {
     console.log('Player:', playerTotal, 'Computer:', compTotal)
   }
 
+  endGame = async () => {
+    this.setState({
+      playerChoice: this.state.playerCards[0],
+      compChoice: null,
+      gameInPlay: false,
+      isModalOpen: false,
+      chosenChallenge: [],
+      winner: '',
+      playerWinnings: null,
+      cardLevelUp: null
+    })
+  }
+
+  completeGame = () => {
+    let cardLevelUp, cardAttrs, playerWinnings
+    const { winner, playerChoice, chosenChallenge, userInfo } = this.state
+
+    if (winner === 'playerChoice') {
+      cardAttrs = chosenChallenge.attributes.map(attr => [attr, playerChoice[attr] + 5])
+      cardLevelUp = Object.fromEntries(cardAttrs)
+      playerWinnings = {
+        coins: userInfo.coins + 20,
+        xp: userInfo.xp + 50
+      }
+      this.setState({ playerWinnings, cardLevelUp, isModalOpen: true })
+    }
+
+    this.setState({ isModalOpen: true })
+  }
+
   render() {
-    console.log(this.state)
     if (!this.state.playerChoice) return false
-    const { playerChoice, playerCards, gameInPlay, chosenChallenge, compChoice, winner } = this.state
+    console.log(this.state.playerWinnings, this.state.cardLevelUp)
+    const { playerChoice, playerCards, gameInPlay, chosenChallenge, compChoice, winner, isModalOpen } = this.state
     return (
       <>
       <Navbar />
@@ -131,7 +164,7 @@ class HeroBattle extends React.Component {
           {playerChoice.length !== 0 ?
           <>
           <div className="container has-text-centered">
-            {gameInPlay ? <button className="button is-danger" onClick={this.findWinner}>BATTLE!!!</button> : <button className="button is-info" onClick={this.setChallenge}>Start</button>}
+            {gameInPlay && winner ? <button className="button is-success" onClick={this.completeGame}>Complete Game</button> : gameInPlay ? <button className="button is-danger" onClick={this.findWinner}>BATTLE!!!</button> :  <button className="button is-info" onClick={this.setChallenge}>Start</button>}
           </div>
           <br />
             <div className="columns is-vcentered">
@@ -215,6 +248,12 @@ class HeroBattle extends React.Component {
             </div>
           </>
           : <h1 className="title is-1">Setting the battlefield...</h1> }
+          {isModalOpen && 
+            <div className="modal is-active">
+              <div className="modal-background"></div>
+              <GameModal winner={winner} resetHandler={this.endGame}/>
+            </div>
+          }
         </div>
       </section>
       </>
