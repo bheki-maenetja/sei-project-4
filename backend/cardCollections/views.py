@@ -95,7 +95,7 @@ class AddCardToCollection(APIView):
 
     return coll_dict
 
-  def put(self, request, pk):
+  def get(self, request, pk):
     chosen_collection = CardCollection.objects.get(pk=pk)
     collection_data = CardCollectionSerializer(chosen_collection).data
 
@@ -161,7 +161,7 @@ class RemoveCardFromCollection(APIView):
 
     return coll_dict
 
-  def put(self, request, pk):
+  def get(self, request, pk):
     chosen_collection = CardCollection.objects.get(pk=pk)
     collection_data = CardCollectionSerializer(chosen_collection).data
 
@@ -190,7 +190,7 @@ class BuyCollection(APIView):
 
   permission_classes = (IsAuthenticated, )
 
-  def put(self, request, pk):
+  def get(self, request, pk):
     buyer = User.objects.get(pk=request.user.id)
     buyer_data = UserSerializer(buyer).data
 
@@ -226,7 +226,7 @@ class SellCollection(APIView):
   
   permission_classes = (IsAuthenticated, )
 
-  def put(self, request, pk):
+  def get(self, request, pk):
     admin = User.objects.get(username='admin')
     seller = User.objects.get(pk=request.user.id)
     seller_data = UserSerializer(seller).data

@@ -85,7 +85,7 @@ class BuySingleCard(APIView):
 
   permission_classes = (IsAuthenticatedOrReadOnly, )
 
-  def put(self, request, pk):
+  def get(self, request, pk):
     buyer = User.objects.get(pk=request.user.id)
     buyer_data = UserSerializer(buyer).data
 
@@ -112,13 +112,15 @@ class BuySingleCard(APIView):
 
 class SellSingleCard(APIView):
 
-  permission_classes = (IsAuthenticatedOrReadOnly, )
+  permission_classes = (IsAuthenticated, )
 
-  def put(self, request, pk):
+  def get(self, request, pk):
     admin = User.objects.get(username='admin')
     seller = User.objects.get(pk=request.user.id)
     seller_data = UserSerializer(seller).data
-    # return Response({'collectionIds': seller_data['collections']}, status=HTTP_200_OK)
+
+    token = request.headers.get('Authorization')
+    print(token)
 
     chosen_card = PlayingCard.objects.get(pk=pk)
     card_data = PlayingCardSerializer(chosen_card).data
@@ -128,7 +130,13 @@ class SellSingleCard(APIView):
     card_data['owner'] = admin.id
 
     for coll_Id in seller_data['collections']:
-      put_res = requests.put(url = f'http://localhost:8000/api/collections/{coll_Id}/remove-card/', json={'cardIds': [chosen_card.id]})
+      put_res = requests.get(
+        url = f'http://localhost:8000/api/collections/{coll_Id}/remove-card/', 
+        json={'cardIds': [chosen_card.id]}, 
+        headers={
+          'Authorization': token
+        }
+      )
 
     updated_seller = UserSerializer(seller, data=seller_data)
     updated_card = PlayingCardSerializer(chosen_card, data=card_data)
