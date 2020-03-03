@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import TitlePageImage from '../../assets/title-page-background.jpg'
+import TitlePageImage from '../../assets/title-page-background.gif'
 
 class TitlePage extends React.Component {
   
@@ -9,7 +9,7 @@ class TitlePage extends React.Component {
 
   render() {
     return (
-      <section className="hero is-fullheight is-info">
+      <section className="hero is-fullheight is-info" style={{ backgroundImage: `url(${TitlePageImage})`, backgroundPosition: 'center', backgroundSize: 'cover' }}>
         <div className="hero-body">
           <div className="container">
             <h1 className="title is-1 has-text-centered">Welcome to POW!!!</h1>
