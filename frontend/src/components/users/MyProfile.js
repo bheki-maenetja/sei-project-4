@@ -12,6 +12,8 @@ import UserCollectionModal from './UserCollectionModals'
 
 import Authorize from '../../lib/authorize'
 
+import ProfileBackground from '../../assets/profile-page-background.jpg'
+
 class MyProfile extends React.Component {
   
   state = {
@@ -102,7 +104,7 @@ class MyProfile extends React.Component {
     return (
       <>
       <Navbar />
-      <section className="section" style={{height: '93vh', overflowY: 'scroll'}}>
+      <section className="section" style={{height: '95vh', overflowY: 'scroll', backgroundImage: `url(${ProfileBackground})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
         <div className="container">
           <h1 className="title is-1 has-text-black">{userInfo.alias}</h1>
           <hr />

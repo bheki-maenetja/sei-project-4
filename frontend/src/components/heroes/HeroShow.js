@@ -1,6 +1,8 @@
 import React from 'react'
 import Navbar from '../common/Navbar'
 
+import HeroShowBackground from '../../assets/hero-show-background.jpg'
+
 import axios from 'axios'
 
 class HeroShow extends React.Component {
@@ -24,14 +26,14 @@ class HeroShow extends React.Component {
     return (
       <>
       <Navbar />
-      <section className="section">
+      <section className="section" style={{ backgroundImage: `url(${HeroShowBackground})`, backgroundPosition: 'center', backgroundSize: 'cover', height: '95vh' }}>
         <div className="container">
           <h1 className="title is-1">{chosenHero.name} ({chosenHero.slug})</h1>
           <hr />
           <div className="columns is-mobile">
             <div className="column is-half">
               <figure className="image is-fullheight">
-                <img src={chosenHero.image_url} alt="Look a picture" />
+                <img src={chosenHero.image_url} style={{ maxHeight: '625px' }} alt="Look a picture" />
               </figure>
             </div>
             <div className="column is-half" >

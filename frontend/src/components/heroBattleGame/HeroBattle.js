@@ -7,6 +7,8 @@ import Navbar from '../common/Navbar'
 import HeroSearchForm from '../heroCompare/HeroSearchForm'
 import GameModal from './GameModal'
 
+import HeroBattleBackground from '../../assets/hero-battle-carousel.jpeg'
+
 class HeroBattle extends React.Component {
   
   state = {
@@ -212,10 +214,16 @@ class HeroBattle extends React.Component {
     return (
       <>
       <Navbar />
-      <section className="section">
+      <section className="section" style={{ height: '95vh', overflowY: 'scroll', backgroundImage: `url(${HeroBattleBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <div className="container">
-          <h1 className="title is-1 has-text-centered">SUPERHERO BATTLE</h1>
-          <h2 className="subtitle is-5 has-text-centered">Put your cards to the test in the ultimate battle of champions!</h2>
+        <div className="hero is-small is-dark">
+          <div className="hero-body">
+            <div className="container">
+              <h1 className="title is-1 has-text-centered has-text-white">SUPERHERO BATTLE</h1>
+              <h2 className="subtitle is-5 has-text-centered has-text-white">Put your cards to the test in the ultimate battle of champions!</h2>
+            </div>
+          </div>
+        </div>
           <hr />
           {playerChoice.length !== 0 ?
           <>
@@ -268,9 +276,9 @@ class HeroBattle extends React.Component {
                     <h1 className="title is-1 has-text-centered">VS</h1>
                     {chosenChallenge.attributes && 
                       <div className="container">
-                        <h1 className="title is-4">{chosenChallenge.name}</h1>
-                        <p className="subtitle is-6">{chosenChallenge.description}</p>
-                        <p>Key Attributes: {chosenChallenge.attributes.join(', ')}</p>
+                        <h1 className="title is-4 has-text-white">{chosenChallenge.name}</h1>
+                        <p className="subtitle is-6 has-text-white">{chosenChallenge.description}</p>
+                        <p className="has-text-white">Key Attributes: {chosenChallenge.attributes.join(', ')}</p>
                       </div>
                     }
                   </>
@@ -307,7 +315,12 @@ class HeroBattle extends React.Component {
               </div>
             </div>
           </>
-          : <h1 className="title is-1">Setting the battlefield...</h1> }
+          : 
+          <>
+          <h1 className="title is-1 has-text-white">Setting the battlefield...</h1>
+          <progress className="progress is-large is-info" max="100">60%</progress>
+          </>
+          }
           {isModalOpen && 
             <div className="modal is-active">
               <div className="modal-background"></div>

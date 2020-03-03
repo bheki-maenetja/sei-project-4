@@ -4,6 +4,8 @@ import axios from 'axios'
 import Navbar from '../common/Navbar'
 import HeroSearchForm from './HeroSearchForm'
 
+import HeroCompareBackground from '../../assets/hero-compare-background.jpg'
+
 class HeroCompare extends React.Component {
   
   state = {
@@ -72,9 +74,9 @@ class HeroCompare extends React.Component {
     return (
       <>
       <Navbar />
-      <section className="section">
+      <section className="section" style={{ backgroundImage: `url(${HeroCompareBackground})`, backgroundPosition: 'center', backgroundSize: 'cover' , height: '95vh'}}>
         <div className="container">
-          <h1 className="title is-1 has-text-centered">Compare Your Favourite Superheroes!!!</h1>
+          <h1 className="title is-1 has-text-centered has-text-white">Compare Your Favourite Superheroes!!!</h1>
           <hr/>
           <div className="container has-text-centered">
             {!this.state.gameInPlay ? <button className="button is-info" onClick={this.findWinner}>Find the Winner</button> : <button className="button is-danger" onClick={this.resetPage}>Reset</button>}
@@ -85,7 +87,7 @@ class HeroCompare extends React.Component {
             <div className="column is-5">
               {this.state.gameInPlay ?
               <>
-              {this.state.gameInPlay && <h1 className="title is-1">{this.state.winner === 'firstChoice' ? 'Winner' : this.state.winner === 'secondChoice' ? 'Loser' : 'Draw'}</h1>}
+              {this.state.gameInPlay && <h1 className="title is-1 has-text-centered has-text-white">{this.state.winner === 'firstChoice' ? 'Winner' : this.state.winner === 'secondChoice' ? 'Loser' : 'Draw'}</h1>}
               </>
               :
               <>
@@ -113,7 +115,7 @@ class HeroCompare extends React.Component {
             <div className="column is-5">
               {this.state.gameInPlay ? 
               <>
-              {this.state.gameInPlay && <h1 className="title is-1">{this.state.winner === 'secondChoice' ? 'Winner' : this.state.winner === 'firstChoice' ? 'Loser' : 'Draw'}</h1>}
+              {this.state.gameInPlay && <h1 className="title is-1 has-text-centered has-text-white">{this.state.winner === 'secondChoice' ? 'Winner' : this.state.winner === 'firstChoice' ? 'Loser' : 'Draw'}</h1>}
               </>
               : 
               <>

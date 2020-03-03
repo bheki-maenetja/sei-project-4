@@ -3,6 +3,7 @@ import Navbar from '../common/Navbar'
 import axios from 'axios'
 
 import HeroCard from './HeroCard'
+import IndexBackground from '../../assets/hero-directory-background.png'
 
 class HeroIndex extends React.Component {
   
@@ -29,7 +30,7 @@ class HeroIndex extends React.Component {
     return (
       <>
       <Navbar />
-      <section className="section" style={{ height: '93vh', overflowY: 'scroll' }}>
+      <section className="section" style={{ height: '95vh', overflowY: 'scroll', backgroundImage: `url(${IndexBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <div className="container">
           <form>
             <div className="field has-addons">

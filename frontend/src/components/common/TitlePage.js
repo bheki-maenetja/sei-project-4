@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import TitlePageImage from '../../assets/title-page-background.jpg'
+
 class TitlePage extends React.Component {
   
   state = {}

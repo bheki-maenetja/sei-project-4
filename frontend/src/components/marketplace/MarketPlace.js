@@ -10,6 +10,9 @@ import MarketCardModal from './MarketCardModal'
 import MarketCollectionIndex from './MarketCollectionIndex'
 import MarketCollectionModal from './MarketCollectionModals'
 
+import MarketPlaceHero from '../../assets/marketplace-carousel.jpg'
+import MarketPlaceBackground from '../../assets/hero-directory-background.png'
+
 class MarketPlace extends React.Component {
   
   state = {
@@ -160,111 +163,123 @@ class MarketPlace extends React.Component {
     return (
       <>
       <Navbar />
-      <div className="hero is-medium is-success">
-        <div className="hero-body">
-          <div className="container">
-            <h1 className="title is-1 has-text-centered">Welcome to the Marketplace</h1>
-            <h2 className="subtitle is-4 has-text-centered">Explore over 8000 playing cards and collections</h2>
+      <div style={{ height: '95vh', overflowY: 'scroll', display: 'flex', flexDirection: 'column' }}>
+        <div className="hero is-medium is-success" style={{backgroundImage: `url(${MarketPlaceHero})`, backgroundPosition: 'center', backgroundSize: 'cover'}}>
+          <div className="hero-body">
+            <div className="container">
+              <h1 className="title is-1 has-text-centered has-text-black">Welcome to the Marketplace</h1>
+              <h2 className="subtitle is-4 has-text-centered has-text-black">Explore over 8000 playing cards and collections</h2>
+            </div>
           </div>
         </div>
-      </div>
-      <section className="section">
-        {userInfo &&
-          <>
-          <div className="container">
-            <h3 className="subtitle is-4 has-text-centered">My Balance: ${userInfo.coins}</h3>
-          </div>
-          <br />
-          </>
-        }
-        <div className="container">
-          <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.setState({ tabIndex })}>
-            <TabList>
-              <Tab></Tab>
-              <Tab></Tab>
-            </TabList>
-            <div className="tabs is-centered is-large is-boxed is-fullwidth">
-              <ul>
-                <li className={`${this.state.tabIndex === 0 ? 'is-active' : ''}`} onClick={() => this.changeTabs(0)}>
-                  <a href="#">Cards</a>
-                </li>
-                <li className={`${this.state.tabIndex === 1 ? 'is-active' : ''}`} onClick={() => this.changeTabs(1)}>
-                  <a href="#">Card Collections</a>
-                </li>
-              </ul>
+        <section className="section" style={{ backgroundImage: `url(${MarketPlaceBackground})`, flexGrow: '1' }}>
+          {userInfo &&
+            <>
+            <div className="container">
+              <h3 className="subtitle is-4 has-text-centered">My Balance: ${userInfo.coins}</h3>
             </div>
-            <TabPanel>
-              {searchCards ?
-                <>
-                <form>
-                  <div className="field has-addons">
-                    <div className="control is-expanded">
-                      <input 
-                        className="input" 
-                        type="text"
-                        placeholder="Search for cards"
-                        onChange={this.basicCardSearch}
-                      />
-                    </div>
-                    <div className="control">
-                      <button className="button is-danger">Advanced Search</button>
-                    </div>
-                    <div className="control">
-                      <button className="button is-success">Search</button>
-                    </div>
-                  </div>
-                </form>
-                <MarketCardIndex cardData={searchCards} clickHandler={this.setCurrentCard} />
-                </> 
-                : <h1 className="title is-1">Loading Cards...</h1> }
-            </TabPanel>
-            <TabPanel>
-              {searchCollections ?
-                <>
-                <form>
-                  <div className="field has-addons">
-                    <div className="control is-expanded">
-                      <input 
-                        className="input" 
-                        type="text"
-                        placeholder="Search for collections"
-                        onChange={this.basicCollectionSearch}
-                      />
-                    </div>
-                    <div className="control">
-                      <button className="button is-danger">Advanced Search</button>
-                    </div>
-                    <div className="control">
-                      <button className="button is-success">Search</button>
-                    </div>
-                  </div>
-                </form>
-                <MarketCollectionIndex collectionData={searchCollections} clickHandler={this.setCurrentCollection} /> 
-                </>
-                : <h1 className="title is-1">Loading Collections...</h1>}
-            </TabPanel>
-          </Tabs>
-          {isModalOpen && 
-            <div className="modal is-active">
-              <div className="modal-background" onClick={() => this.setState({ isModalOpen: false })}></div>
-              {currentCard && 
-                <MarketCardModal 
-                  currentCard={currentCard} 
-                  clearModal={this.clearModal}
-                  buyHandler={this.buyCurrentCard}
-                />
-              }
-              {currentCollection && 
-                <MarketCollectionModal 
-                  currentColl={currentCollection} 
-                  clearModal={this.clearModal}
-                  buyHandler={this.buyCurrentCollection}
-                />
-              }
-            </div>
+            <br />
+            </>
           }
-        </div>
-      </section>
+          <div className="container">
+            <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.setState({ tabIndex })}>
+              <TabList>
+                <Tab></Tab>
+                <Tab></Tab>
+              </TabList>
+              <div className="tabs is-centered is-large is-boxed is-fullwidth">
+                <ul>
+                  <li className={`${this.state.tabIndex === 0 ? 'is-active' : ''}`} onClick={() => this.changeTabs(0)}>
+                    <a href="#">Cards</a>
+                  </li>
+                  <li className={`${this.state.tabIndex === 1 ? 'is-active' : ''}`} onClick={() => this.changeTabs(1)}>
+                    <a href="#">Card Collections</a>
+                  </li>
+                </ul>
+              </div>
+              <TabPanel>
+                {searchCards ?
+                  <>
+                  <form>
+                    <div className="field has-addons">
+                      <div className="control is-expanded">
+                        <input 
+                          className="input" 
+                          type="text"
+                          placeholder="Search for cards"
+                          onChange={this.basicCardSearch}
+                        />
+                      </div>
+                      <div className="control">
+                        <button className="button is-danger">Advanced Search</button>
+                      </div>
+                      <div className="control">
+                        <button className="button is-success">Search</button>
+                      </div>
+                    </div>
+                  </form>
+                  <MarketCardIndex cardData={searchCards} clickHandler={this.setCurrentCard} />
+                  </> 
+                  : 
+                  <>
+                  <h1 className="title is-1">Loading Cards...</h1>
+                  <progress className="progress is-large is-success" max="100">60%</progress>
+                  </>
+                  }
+              </TabPanel>
+              <TabPanel>
+                {searchCollections ?
+                  <>
+                  <form>
+                    <div className="field has-addons">
+                      <div className="control is-expanded">
+                        <input 
+                          className="input" 
+                          type="text"
+                          placeholder="Search for collections"
+                          onChange={this.basicCollectionSearch}
+                        />
+                      </div>
+                      <div className="control">
+                        <button className="button is-danger">Advanced Search</button>
+                      </div>
+                      <div className="control">
+                        <button className="button is-success">Search</button>
+                      </div>
+                    </div>
+                  </form>
+                  <MarketCollectionIndex collectionData={searchCollections} clickHandler={this.setCurrentCollection} /> 
+                  </>
+                  :
+                  <>
+                  <h1 className="title is-1">Loading Collections...</h1>
+                  <progress className="progress is-large is-success" max="100">60%</progress>
+                  </>
+                  }
+              </TabPanel>
+            </Tabs>
+            {isModalOpen && 
+              <div className="modal is-active">
+                <div className="modal-background" onClick={() => this.setState({ isModalOpen: false })}></div>
+                {currentCard && 
+                  <MarketCardModal 
+                    currentCard={currentCard} 
+                    clearModal={this.clearModal}
+                    buyHandler={this.buyCurrentCard}
+                  />
+                }
+                {currentCollection && 
+                  <MarketCollectionModal 
+                    currentColl={currentCollection} 
+                    clearModal={this.clearModal}
+                    buyHandler={this.buyCurrentCollection}
+                  />
+                }
+              </div>
+            }
+          </div>
+        </section>
+      </div>
       </>
     )
   }
