@@ -17,7 +17,7 @@ const GameModal = ({ winner, resetHandler }) => (
       </figure>
       <hr />
       <h1 className="modal-card-title is-1 has-text-centered">
-        {winner === 'playerChoice' ? 'Fantastic! You\'ve earned $20 and 50 xp' : winner === 'compChoice' ? '"Do or do not. There is no try."' : '"Perfectly balanced, as all things should be"'}
+        {winner === 'playerChoice' ? 'Fantastic! You\'ve earned $20 and 50 xp.\nYou\'ve also earned a +5 card level up!' : winner === 'compChoice' ? '"Do or do not. There is no try."' : '"Perfectly balanced, as all things should be"'}
       </h1>
     </div>
     <div className="modal-card-foot">

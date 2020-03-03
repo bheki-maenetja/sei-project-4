@@ -35,7 +35,7 @@ class MarketPlace extends React.Component {
           }
         })
       ])
-      const allCards = res[0].data.filter(card => !card.owner || card.owner.username === 'admin')
+      const allCards = res[0].data.filter(card => (!card.owner || card.owner.username === 'admin') && card.collections.length === 0)
       const allCollections = res[1].data.filter(coll => coll.owner.username === 'admin')
       this.setState({
         cards: allCards,
@@ -60,7 +60,7 @@ class MarketPlace extends React.Component {
           }
         })
       ])
-      const allCards = res[0].data.filter(card => !card.owner || card.owner.username === 'admin')
+      const allCards = res[0].data.filter(card => (!card.owner || card.owner.username === 'admin') && card.collections.length === 0)
       const allCollections = res[1].data.filter(coll => coll.owner.username === 'admin')
       this.setState({
         isModalOpen: false,
@@ -157,6 +157,7 @@ class MarketPlace extends React.Component {
 
   render() {
     const { searchCards, searchCollections, isModalOpen, currentCard, currentCollection, userInfo } = this.state
+    console.log(searchCards)
     return (
       <>
       <Navbar />

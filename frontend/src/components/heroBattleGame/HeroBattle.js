@@ -12,7 +12,7 @@ class HeroBattle extends React.Component {
   state = {
     battleChallenges: [
       {
-        name: 'Million Mile Dash',
+        name: 'The Million Mile Dash',
         description: 'Both heroes will race around the earth\'s equator 252 times. First to the finish wins!',
         attributes: ['speed', 'durability']
       },
@@ -67,12 +67,96 @@ class HeroBattle extends React.Component {
       ])
       const compCards = res[0].data.filter(card => !card.owner || card.owner.username === 'admin')
       const playerCards = res[1].data.cards
-      this.setState({ userInfo: res[1].data, compCards, playerCards, playerChoice: playerCards[0] })
+      this.setState({ 
+        userInfo: res[1].data, 
+        compCards, playerCards, 
+        playerChoice: playerCards[0] 
+      })
     } catch(err) {
       console.log(err)
     }
   }
 
+  refreshGame = async () => {
+    try {
+      const res = await Promise.all([
+        axios.get('/api/cards/'),
+        axios.get('/api/users/my-profile/', {
+          headers: {
+            Authorization: `Bearer ${Authorize.getToken()}`
+          }
+        })
+      ])
+      const compCards = res[0].data.filter(card => !card.owner || card.owner.username === 'admin')
+      const playerCards = res[1].data.cards
+      this.setState({ 
+        userInfo: res[1].data, 
+        compCards, playerCards, 
+        playerChoice: playerCards[0] 
+      })
+    } catch(err) {
+      console.log(err)
+    }
+  }
+
+  endGame = async () => {
+
+    const { winner, playerWinnings, playerChoice, cardLevelUp } = this.state
+    
+    this.setState({
+      userInfo: null,
+      playerCards: [],
+      compCards: null,
+      playerChoice: [],
+      compChoice: null,
+      gameInPlay: false,
+      isModalOpen: false,
+      chosenChallenge: [],
+      winner: '',
+      playerWinnings: null,
+      cardLevelUp: null
+    })
+
+    const playerDataJSON = JSON.stringify(playerWinnings)
+
+    if (winner === 'playerChoice') {
+      try {
+        await Promise.all([
+          axios.get('/api/users/my-profile/update/', { 
+            headers: {
+              Authorization: `Bearer ${Authorize.getToken()}`,
+              playerData: playerDataJSON
+            },
+          }),
+          axios.put(`/api/cards/${playerChoice.id}/level-up/`, cardLevelUp)
+        ])
+        this.refreshGame()
+        return
+      } catch (err) {
+        console.log(err.response)
+      }
+    }
+
+    this.refreshGame()
+  }
+
+  completeGame = () => {
+    let cardLevelUp, cardAttrs, playerWinnings
+    const { winner, playerChoice, chosenChallenge, userInfo } = this.state
+
+    if (winner === 'playerChoice') {
+      cardAttrs = chosenChallenge.attributes.map(attr => [attr, playerChoice[attr] + 5])
+      cardLevelUp = Object.fromEntries(cardAttrs)
+      playerWinnings = {
+        coins: userInfo.coins + 20,
+        xp: userInfo.xp + 50
+      }
+      this.setState({ playerWinnings, cardLevelUp, isModalOpen: true })
+    }
+
+    this.setState({ isModalOpen: true })
+  }
+  
   handleChange = (e) => {
     const heroChoice = this.state.playerCards.filter(item => item.id === parseInt(e.target.value))[0]
     this.setState({ [e.target.name]: heroChoice })
@@ -119,39 +203,9 @@ class HeroBattle extends React.Component {
     console.log('Player:', playerTotal, 'Computer:', compTotal)
   }
 
-  endGame = async () => {
-    this.setState({
-      playerChoice: this.state.playerCards[0],
-      compChoice: null,
-      gameInPlay: false,
-      isModalOpen: false,
-      chosenChallenge: [],
-      winner: '',
-      playerWinnings: null,
-      cardLevelUp: null
-    })
-  }
-
-  completeGame = () => {
-    let cardLevelUp, cardAttrs, playerWinnings
-    const { winner, playerChoice, chosenChallenge, userInfo } = this.state
-
-    if (winner === 'playerChoice') {
-      cardAttrs = chosenChallenge.attributes.map(attr => [attr, playerChoice[attr] + 5])
-      cardLevelUp = Object.fromEntries(cardAttrs)
-      playerWinnings = {
-        coins: userInfo.coins + 20,
-        xp: userInfo.xp + 50
-      }
-      this.setState({ playerWinnings, cardLevelUp, isModalOpen: true })
-    }
-
-    this.setState({ isModalOpen: true })
-  }
-
   render() {
     if (!this.state.playerChoice) return false
-    console.log(this.state.playerWinnings, this.state.cardLevelUp)
+    // console.log(this.state)
     const { playerChoice, playerCards, gameInPlay, chosenChallenge, compChoice, winner, isModalOpen } = this.state
     return (
       <>

@@ -1,3 +1,4 @@
+import json
 from datetime import datetime, timedelta
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -54,14 +55,21 @@ class ProfileView(APIView):
     except User.DoesNotExist:
       return Response({'message': 'User not found'}, status=HTTP_404_NOT_FOUND)
 
-  def put(self, request):
+class UpdateProfile(APIView):
+
+  permission_classes = (IsAuthenticated, )
+
+  def get(self, request):
+    playerData = request.headers.get('Playerdata')
+    playerData = json.loads(playerData)
+    
     try:
       user = User.objects.get(pk=request.user.id)
       user_data = UpdateUserSerializer(user).data
     except User.DoesNotExist:
       return Response({'message: User not found'}, status=HTTP_404_NOT_FOUND)
 
-    user_data.update(request.data)
+    user_data.update(playerData)
     updated_user = UpdateUserSerializer(user, data=user_data)
     if updated_user.is_valid():
       updated_user.save()
