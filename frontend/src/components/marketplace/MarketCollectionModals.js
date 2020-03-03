@@ -18,6 +18,29 @@ const MarketCollectionModal = ({ currentColl, clearModal }) => (
       <p><strong>Average Overall:</strong> <span>{currentColl.avg_overall}</span></p>
       <p><strong>Level {currentColl.avg_level.power_level} ({currentColl.avg_level.name})</strong></p>
       <p><strong>Market Value: ${currentColl.value} ({currentColl.price_bracket.name})</strong></p>
+      <hr />
+        <h2 className="title has-text-centered is-4">Cards</h2>
+        <hr />
+        <div className="columns is-mobile is-multiline">
+          {currentColl.cards.map(card => {
+            return (
+              <div className="column is-one-third" key={card.id}>
+                <div className="card">
+                  <div className="card-image">
+                    <figure className="image">
+                      <img src={card.image} alt={card.name} />
+                    </figure>
+                  </div>
+                  <div className="card-content">
+                    <p className="title has-text-centered is-5"><strong>{card.name}</strong></p>
+                    <p className="subtitle has-text-centered is-6">{card.level.name}</p>
+                    <p className="subtitle has-text-centered is-6">{card.price_bracket.name}</p>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
     </div>
     <div className="modal-card-foot">
       <button className="button modal-card-title is-info">Buy</button>

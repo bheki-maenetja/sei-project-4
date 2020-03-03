@@ -85,6 +85,7 @@ class MyProfile extends React.Component {
   render() {
     const { userInfo } = this.state
     if (!userInfo) return null
+    console.log(this.state.currentCollection)
     return (
       <>
       <Navbar />
