@@ -87,9 +87,10 @@ class CardSerializer(serializers.ModelSerializer):
 class CollectionSerializer(serializers.ModelSerializer):
   avg_level = CollectionPowerLevelSerializer()
   price_bracket = CollectionPriceBracketSerializer()
+  cards = CardSerializer(many=True)
   class Meta:
     model = CardCollection
-    exclude = ('owner', 'cards')
+    exclude = ('owner', )
 
 # Populated Native Serializers
 class PopulatedUserSerializer(UserSerializer):
