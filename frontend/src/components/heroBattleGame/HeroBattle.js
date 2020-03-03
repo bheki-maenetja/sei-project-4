@@ -65,12 +65,14 @@ class HeroBattle extends React.Component {
           }
         })
       ])
+      const chosenChallenge = this.state.battleChallenges[Math.floor(Math.random() * this.state.battleChallenges.length)]
       const compCards = res[0].data.filter(card => !card.owner || card.owner.username === 'admin')
       const playerCards = res[1].data.cards
       this.setState({ 
         userInfo: res[1].data, 
         compCards, playerCards, 
-        playerChoice: playerCards[0] 
+        playerChoice: playerCards[0],
+        chosenChallenge
       })
     } catch(err) {
       console.log(err)
@@ -87,12 +89,14 @@ class HeroBattle extends React.Component {
           }
         })
       ])
+      const chosenChallenge = this.state.battleChallenges[Math.floor(Math.random() * this.state.battleChallenges.length)]
       const compCards = res[0].data.filter(card => !card.owner || card.owner.username === 'admin')
       const playerCards = res[1].data.cards
       this.setState({ 
         userInfo: res[1].data, 
         compCards, playerCards, 
-        playerChoice: playerCards[0] 
+        playerChoice: playerCards[0],
+        chosenChallenge
       })
     } catch(err) {
       console.log(err)
@@ -145,7 +149,7 @@ class HeroBattle extends React.Component {
     const { winner, playerChoice, chosenChallenge, userInfo } = this.state
 
     if (winner === 'playerChoice') {
-      cardAttrs = chosenChallenge.attributes.map(attr => [attr, playerChoice[attr] + 5])
+      cardAttrs = chosenChallenge.attributes.map(attr => [attr, playerChoice[attr] + 2])
       cardLevelUp = Object.fromEntries(cardAttrs)
       playerWinnings = {
         coins: userInfo.coins + 20,
@@ -178,9 +182,8 @@ class HeroBattle extends React.Component {
   }
 
   setChallenge = () => {
-    const chosenChallenge = this.state.battleChallenges[Math.floor(Math.random() * this.state.battleChallenges.length)]
     const compChoice = this.getRandomCompCard()
-    this.setState({ chosenChallenge, compChoice, gameInPlay: true })
+    this.setState({ compChoice, gameInPlay: true })
   }
 
   findWinner = () => {
@@ -205,7 +208,6 @@ class HeroBattle extends React.Component {
 
   render() {
     if (!this.state.playerChoice) return false
-    // console.log(this.state)
     const { playerChoice, playerCards, gameInPlay, chosenChallenge, compChoice, winner, isModalOpen } = this.state
     return (
       <>
@@ -218,7 +220,11 @@ class HeroBattle extends React.Component {
           {playerChoice.length !== 0 ?
           <>
           <div className="container has-text-centered">
-            {gameInPlay && winner ? <button className="button is-success" onClick={this.completeGame}>Complete Game</button> : gameInPlay ? <button className="button is-danger" onClick={this.findWinner}>BATTLE!!!</button> :  <button className="button is-info" onClick={this.setChallenge}>Start</button>}
+            {gameInPlay && winner ? 
+              <button className="button is-success" onClick={this.completeGame}>Complete Game</button> 
+              : gameInPlay ? 
+              <button className="button is-danger" onClick={this.findWinner}>BATTLE!!!</button> 
+              : <button className="button is-info" onClick={this.setChallenge}>Start</button>}
           </div>
           <br />
             <div className="columns is-vcentered">

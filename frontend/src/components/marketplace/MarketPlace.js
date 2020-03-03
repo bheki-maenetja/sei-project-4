@@ -157,7 +157,6 @@ class MarketPlace extends React.Component {
 
   render() {
     const { searchCards, searchCollections, isModalOpen, currentCard, currentCollection, userInfo } = this.state
-    console.log(searchCards)
     return (
       <>
       <Navbar />
