@@ -1,6 +1,6 @@
 import React from 'react'
 
-const MarketCollectionModal = ({ currentColl, clearModal }) => (
+const MarketCollectionModal = ({ currentColl, clearModal, buyHandler }) => (
   <>
   <div className="modal-card">
     <div className="modal-card-head">
@@ -43,7 +43,7 @@ const MarketCollectionModal = ({ currentColl, clearModal }) => (
         </div>
     </div>
     <div className="modal-card-foot">
-      <button className="button modal-card-title is-info">Buy</button>
+      <button className="button modal-card-title is-info" onClick={() => buyHandler(currentColl.id)}>Buy</button>
     </div>
   </div>
   </>

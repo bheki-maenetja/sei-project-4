@@ -74,6 +74,19 @@ class MyProfile extends React.Component {
     }
   }
 
+  sellCurrentCollection = async (collId) => {
+    try {
+      await axios.get(`/api/collections/${collId}/sell/`, {
+        headers: {
+          Authorization: `Bearer ${Authorize.getToken()}`
+        }
+      })
+      this.refreshProfile()
+    } catch (err) {
+      console.log(err.response)
+    }
+  }
+  
   setCurrentCollection = (collectionId) => {
     this.setState({ currentCollection: this.state.userCollections.find(coll => coll.id === collectionId), isModalOpen: true })
   }
@@ -165,7 +178,8 @@ class MyProfile extends React.Component {
               {this.state.currentCollection && 
                 <UserCollectionModal 
                   currentColl={this.state.currentCollection} 
-                  clearModal={this.clearModal} 
+                  clearModal={this.clearModal}
+                  sellHandler={this.sellCurrentCollection}
                 />
               }
             </div>

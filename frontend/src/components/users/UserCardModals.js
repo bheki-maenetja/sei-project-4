@@ -64,7 +64,6 @@ const UserCardModal = ({ currentCard, clearModal, sellHandler }) => (
       <p><strong>Market Value:</strong> <span>${currentCard.price} ({currentCard.price_bracket.name})</span></p>
     </div>
     <div className="modal-card-foot">
-      <button className="button modal-card-title is-info">Add to Collection</button>
       <button className="button modal-card-title is-warning" onClick={() => sellHandler(currentCard.id)}>Sell</button>
     </div>
   </div>

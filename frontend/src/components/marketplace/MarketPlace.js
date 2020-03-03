@@ -88,6 +88,41 @@ class MarketPlace extends React.Component {
           Authorization: `Bearer ${Authorize.getToken()}`
         }
       })
+      this.setState({
+        isModalOpen: false,
+        tabIndex: 0,
+        userInfo: null,
+        cards: null,
+        searchCards: null,
+        collections: null,
+        searchCollections: null,
+        currentCard: null,
+        currentCollection: null
+      })
+      this.refreshMarket()
+    } catch (err) {
+      console.log(err.response)
+    }
+  }
+
+  buyCurrentCollection = async (collId) => {
+    try {
+      await axios.get(`/api/collections/${collId}/buy/`, {
+        headers: {
+          Authorization: `Bearer ${Authorize.getToken()}`
+        }
+      })
+      this.setState({
+        isModalOpen: false,
+        tabIndex: 0,
+        userInfo: null,
+        cards: null,
+        searchCards: null,
+        collections: null,
+        searchCollections: null,
+        currentCard: null,
+        currentCollection: null
+      })
       this.refreshMarket()
     } catch (err) {
       console.log(err.response)
@@ -122,7 +157,6 @@ class MarketPlace extends React.Component {
 
   render() {
     const { searchCards, searchCollections, isModalOpen, currentCard, currentCollection, userInfo } = this.state
-    console.log(currentCollection)
     return (
       <>
       <Navbar />
@@ -220,7 +254,13 @@ class MarketPlace extends React.Component {
                   buyHandler={this.buyCurrentCard}
                 />
               }
-              {currentCollection && <MarketCollectionModal currentColl={currentCollection} clearModal={this.clearModal} />}
+              {currentCollection && 
+                <MarketCollectionModal 
+                  currentColl={currentCollection} 
+                  clearModal={this.clearModal}
+                  buyHandler={this.buyCurrentCollection}
+                />
+              }
             </div>
           }
         </div>
