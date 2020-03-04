@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import { Carousel } from 'react-responsive-carousel'
 
-import LogoImage from '../../assets/logo.png'
 import HeroBattleImage from '../../assets/hero-battle-carousel.jpeg'
 import HeroExploreImage from '../../assets/hero-directory-carousel.jpg'
 import MarketPlaceImage from '../../assets/marketplace-carousel.jpg'

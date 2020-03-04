@@ -153,7 +153,7 @@ class MarketPlace extends React.Component {
   }
   
   basicCardSearch = (e) => {
-    const searchString = e.target.value
+    const searchString = e.target.value.trim()
     const { cards } = this.state
     const filteredCards = cards.filter(card => card.name.toLowerCase().includes(searchString.toLowerCase()))
     this.setState({ searchCards: filteredCards })

@@ -205,8 +205,6 @@ class HeroBattle extends React.Component {
     if (playerTotal > compTotal) this.setState({ winner: 'playerChoice' })
     else if (compTotal > playerTotal) this.setState({ winner: 'compChoice' })
     else this.setState({ winner: 'Draw' })
-
-    console.log('Player:', playerTotal, 'Computer:', compTotal)
   }
 
   render() {

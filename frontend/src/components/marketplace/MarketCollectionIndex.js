@@ -7,10 +7,10 @@ const MarketCollectionIndex = ({ collectionData, clickHandler }) => (
       <div className="columns is-mobile is-multiline">
         {collectionData.map(collection => {
           return (
-            <div className="column is-one-quarter-desktop is-one-third-tablet is-full-mobile" key={collection.id}>
+            <div className="column is-one-third-desktop is-one-third-tablet is-full-mobile" key={collection.id}>
               <div className="card" onClick={() => clickHandler(collection.id)}>
                 <div className="card-image">
-                  <figure className="card-image">
+                  <figure className="image is-square">
                     <img src={collection.image} alt={collection.name} />
                   </figure>
                 </div>

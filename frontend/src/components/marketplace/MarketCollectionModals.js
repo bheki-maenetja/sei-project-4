@@ -32,9 +32,9 @@ const MarketCollectionModal = ({ currentColl, clearModal, buyHandler }) => (
                     </figure>
                   </div>
                   <div className="card-content">
-                    <p className="title has-text-centered is-5"><strong>{card.name}</strong></p>
-                    <p className="subtitle has-text-centered is-6">{card.level.name}</p>
-                    <p className="subtitle has-text-centered is-6">{card.price_bracket.name}</p>
+                    <p className="title has-text-centered light-text-title is-5"><strong>{card.name}</strong></p>
+                    <p className="subtitle has-text-centered light-text-body is-6">{card.level.name}</p>
+                    <p className="subtitle has-text-centered light-text-body is-6">{card.price_bracket.name}</p>
                   </div>
                 </div>
               </div>

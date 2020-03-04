@@ -53,7 +53,7 @@ class HeroCompare extends React.Component {
       this.setState({ gameInPlay: true })
     }
     
-    console.log('First Choice:', playerTotal, 'Second Choice:', compTotal)
+    // console.log('First Choice:', playerTotal, 'Second Choice:', compTotal)
   }
 
   resetPage = () => {
