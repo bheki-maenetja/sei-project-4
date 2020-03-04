@@ -7,7 +7,7 @@ const HeroSearchForm = ({ heroData, handleChange, name, choiceObject, getRandomH
       <div className="level">
         <div className="level-left">
           <div className="control">
-            <label className="label">Choose a hero</label>
+            <label className="label light-text-body">Choose a hero</label>
             <select className="select" name={name} value={choiceObject.id} onChange={handleChange}>
               {heroData.map(item => {
                 return (

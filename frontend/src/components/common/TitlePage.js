@@ -12,7 +12,7 @@ class TitlePage extends React.Component {
       <section className="hero is-fullheight is-info" style={{ backgroundImage: `url(${TitlePageImage})`, backgroundPosition: 'center', backgroundSize: 'cover' }}>
         <div className="hero-body">
           <div className="container">
-            <h1 className="title is-1 has-text-centered">Welcome to the World of Heroes!</h1>
+            <h1 className="title is-1 has-text-centered light-text-title">Welcome to the World of Heroes!</h1>
             <br />
             <div className="container">
               <div className="columns">

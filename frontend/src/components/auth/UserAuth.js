@@ -4,6 +4,8 @@ import axios from 'axios'
 
 import Authorize from '../../lib/authorize'
 
+import AuthBackground from '../../assets/auth-page-background.jpg'
+
 class UserAuth extends React.Component {
   
   state = {
@@ -72,15 +74,15 @@ class UserAuth extends React.Component {
     const { uploadedImage } = this.state
     return (
       <>
-      <section className="section">
-        <div className="container">
-          <div className="columns is-multiline">
+      <section className="section" style={{ height: '100vh', backgroundImage: `url(${AuthBackground})`, backgroundPosition: 'center left', backgroundSize: 'cover', overflowY: 'scroll' }}>
+        <div className="container" style={{ height: '100%' }}>
+          <div className="columns is-vcentered" style={{ height: '100%' }}>
             {this.props.location.pathname === '/register' && 
               <>
               <form className="column is-half is-offset-one-quarter">
-                <h2 className="title is-2">Register</h2>
+                <h2 className="title is-2 has-text-centered light-text-title">Register</h2>
                 <div className="field">
-                  <label className="label">First Name</label>
+                  <label className="label light-text-body">First Name</label>
                   <div className="control">
                     <input 
                       type="text"
@@ -94,7 +96,7 @@ class UserAuth extends React.Component {
                   </div>
                 </div>
                 <div className="field">
-                  <label className="label">Last Name</label>
+                  <label className="label light-text-body">Last Name</label>
                   <div className="control">
                     <input
                       type="text"
@@ -108,7 +110,7 @@ class UserAuth extends React.Component {
                   </div>
                 </div>
                 <div className="field">
-                  <label className="label">Alias</label>
+                  <label className="label light-text-body">Alias</label>
                   <div className="control">
                     <input 
                       type="text"
@@ -122,7 +124,7 @@ class UserAuth extends React.Component {
                   </div>
                 </div>
                 <div className="field">
-                  <label className={`label ${this.state.errors.profile_image ? 'has-text-danger' : ''}`}>Profile Image</label>
+                  <label className={`label light-text-body ${this.state.errors.profile_image ? 'has-text-danger' : ''}`}>Profile Image</label>
                   <div className="control">
                   { uploadedImage ?
                     <figure className="image">
@@ -140,7 +142,7 @@ class UserAuth extends React.Component {
                   </div>
                 </div>
                 <div className="field">
-                  <label className="label">Username</label>
+                  <label className="label light-text-body">Username</label>
                   <div className="control">
                     <input 
                       type="text"
@@ -154,7 +156,7 @@ class UserAuth extends React.Component {
                   </div>
                 </div>
                 <div className="field">
-                  <label className="label">Email</label>
+                  <label className="label light-text-body">Email</label>
                   <div className="control">
                     <input 
                       type="text"
@@ -168,7 +170,7 @@ class UserAuth extends React.Component {
                   </div>
                 </div>
                 <div className="field">
-                  <label className="label">Password</label>
+                  <label className="label light-text-body">Password</label>
                   <div className="control">
                     <input 
                       type="text"
@@ -182,7 +184,7 @@ class UserAuth extends React.Component {
                   </div>
                 </div>
                 <div className="field">
-                  <label className="label">Password Confirmation</label>
+                  <label className="label light-text-body">Password Confirmation</label>
                   <div className="control">
                     <input 
                       type="text"
@@ -201,7 +203,7 @@ class UserAuth extends React.Component {
                   </div>
                   <br />
                   <div className="container">
-                    <p className="has-text-centered">Already have an account? <Link to="/login">Login</Link></p>
+                    <p className="has-text-centered light-text-body">Already have an account? <Link to="/login">Login</Link></p>
                   </div>
                 </div>
               </form>
@@ -210,9 +212,9 @@ class UserAuth extends React.Component {
             {this.props.location.pathname === '/login' &&
               <>
               <form className="column is-half is-offset-one-quarter">
-                <h2 className="title is-2">Login</h2>
+                <h2 className="title is-2 has-text-centered light-text-title">Login</h2>
                 <div className="field">
-                  <label className="label">Email</label>
+                  <label className="label light-text-body">Email</label>
                   <div className="control">
                     <input 
                       type="text"
@@ -225,7 +227,7 @@ class UserAuth extends React.Component {
                   </div>
                 </div>
                 <div className="field">
-                  <label className="label">Password</label>
+                  <label className="label light-text-body">Password</label>
                   <div className="control">
                     <input 
                       type="password" 
@@ -243,7 +245,7 @@ class UserAuth extends React.Component {
                   </div>
                   <br />
                   <div className="container">
-                    <p className="has-text-centered">Don't have an account? <Link to="/register">Register</Link></p>
+                    <p className="has-text-centered light-text-body">Don't have an account? <Link to="/register">Register</Link></p>
                   </div>
                 </div>
               </form>

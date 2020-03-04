@@ -2,6 +2,7 @@ import React, { createContext } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import 'bulma'
+import '../styles/main.css'
 
 // Component Imports
 import UserAuth from './auth/UserAuth'

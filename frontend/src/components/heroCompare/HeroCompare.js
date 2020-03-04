@@ -76,11 +76,11 @@ class HeroCompare extends React.Component {
       <Navbar />
       <section className="section" style={{ backgroundImage: `url(${HeroCompareBackground})`, backgroundPosition: 'center', backgroundSize: 'cover' , height: '95vh'}}>
         <div className="container">
-          <div className="hero is-small is-dark">
+          <div className="hero is-small shadow-box">
             <div className="hero-body">
               <div className="container">
-                <h1 className="title is-1 has-text-centered has-text-white">HERO VS HERO</h1>
-                <h2 className="subtitle is-5 has-text-centered has-text-white">Find out who would win in a fight between two of your favourite superheroes</h2>
+                <h1 className="title is-1 has-text-centered light-text-title">HERO VS HERO</h1>
+                <h2 className="subtitle is-5 has-text-centered light-text-body">Find out who would win in a fight between two of your favourite superheroes</h2>
               </div>
             </div>
           </div>
@@ -94,7 +94,7 @@ class HeroCompare extends React.Component {
             <div className="column is-5">
               {this.state.gameInPlay ?
               <>
-              {this.state.gameInPlay && <h1 className="title is-1 has-text-centered has-text-white">{this.state.winner === 'firstChoice' ? 'Winner' : this.state.winner === 'secondChoice' ? 'Loser' : 'Draw'}</h1>}
+              {this.state.gameInPlay && <h1 className="title is-1 has-text-centered light-text-title">{this.state.winner === 'firstChoice' ? 'Winner' : this.state.winner === 'secondChoice' ? 'Loser' : 'Draw'}</h1>}
               </>
               :
               <>
@@ -122,7 +122,7 @@ class HeroCompare extends React.Component {
             <div className="column is-5">
               {this.state.gameInPlay ? 
               <>
-              {this.state.gameInPlay && <h1 className="title is-1 has-text-centered has-text-white">{this.state.winner === 'secondChoice' ? 'Winner' : this.state.winner === 'firstChoice' ? 'Loser' : 'Draw'}</h1>}
+              {this.state.gameInPlay && <h1 className="title is-1 has-text-centered light-text-title">{this.state.winner === 'secondChoice' ? 'Winner' : this.state.winner === 'firstChoice' ? 'Loser' : 'Draw'}</h1>}
               </>
               : 
               <>

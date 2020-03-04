@@ -228,11 +228,11 @@ class HeroBattle extends React.Component {
       <Navbar />
       <section className="section" style={{ height: '95vh', overflowY: 'scroll', backgroundImage: `url(${HeroBattleBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <div className="container">
-        <div className="hero is-small is-dark">
+        <div className="hero is-small shadow-box">
           <div className="hero-body">
             <div className="container">
-              <h1 className="title is-1 has-text-centered has-text-white">SUPERHERO BATTLE</h1>
-              <h2 className="subtitle is-5 has-text-centered has-text-white">Put your cards to the test in the ultimate battle of champions!</h2>
+              <h1 className="title is-1 has-text-centered light-text-title">SUPERHERO BATTLE</h1>
+              <h2 className="subtitle is-5 has-text-centered light-text-title">Put your cards to the test in the ultimate contest of champions!</h2>
             </div>
           </div>
         </div>
@@ -264,7 +264,7 @@ class HeroBattle extends React.Component {
                     </>
                   }
                   {gameInPlay && winner && 
-                    <h1 className="title is-1">{this.state.winner === 'playerChoice' ? 
+                    <h1 className="title is-1 light-text-title has-text-centered">{this.state.winner === 'playerChoice' ? 
                     'Winner' : this.state.winner === 'compChoice' ? 'Loser' : 'Draw'}</h1>
                   }
                   <div className="card is-fullheight">
@@ -285,12 +285,12 @@ class HeroBattle extends React.Component {
                 <div className="container has-text-centered">
                   {playerChoice.length !== 0 &&
                   <>
-                    <h1 className="title is-1 has-text-centered">VS</h1>
+                    <h1 className="title is-1 has-text-centered light-text-emphatic">VS</h1>
                     {chosenChallenge.attributes && 
-                      <div className="container">
-                        <h1 className="title is-4 has-text-white">{chosenChallenge.name}</h1>
-                        <p className="subtitle is-6 has-text-white">{chosenChallenge.description}</p>
-                        <p className="has-text-white">Key Attributes: {chosenChallenge.attributes.join(', ')}</p>
+                      <div className="container shadow-box">
+                        <h1 className="title is-4 light-text-title">{chosenChallenge.name}</h1>
+                        <p className="subtitle is-6 light-text-body">{chosenChallenge.description}</p>
+                        <p className="light-text-body">Key Attributes: {chosenChallenge.attributes.join(', ')}</p>
                       </div>
                     }
                   </>
@@ -309,7 +309,7 @@ class HeroBattle extends React.Component {
                   </>
                   }
                   {gameInPlay && winner && 
-                    <h1 className="title is-1">{this.state.winner === 'compChoice' ? 
+                    <h1 className="title is-1 light-text-title has-text-centered">{this.state.winner === 'compChoice' ? 
                     'Winner' : this.state.winner === 'playerChoice' ? 'Loser' : 'Draw'}</h1>
                   }
                   <div className="card is-fullheight">
@@ -329,7 +329,7 @@ class HeroBattle extends React.Component {
           </>
           : 
           <>
-          <h1 className="title is-1 has-text-white">Setting the battlefield...</h1>
+          <h1 className="title is-1 light-text-title">Setting the battlefield...</h1>
           <progress className="progress is-large is-info" max="100">60%</progress>
           </>
           }

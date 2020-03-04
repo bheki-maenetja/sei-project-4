@@ -1,0 +1,36 @@
+* {
+  box-sizing: border-box;
+}
+
+.light-text-title {
+  color: white;
+  text-shadow: 3px 3px black;
+  font-weight: 900;
+}
+
+.light-text-body {
+  color: white;
+  text-shadow: 1px 1px black;
+}
+
+.light-text-emphatic {
+  color: white;
+  text-shadow: 5px 5px black;
+}
+
+.dark-text-title {
+  color: black;
+  text-shadow: 2px 2px white;
+}
+
+.dark-text-body {
+  color: black;
+  text-shadow: 1px 1px white;
+}
+
+.shadow-box {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 5px black;
+  padding: 5px
+}

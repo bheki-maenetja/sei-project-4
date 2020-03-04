@@ -182,17 +182,17 @@ class MarketPlace extends React.Component {
       <div style={{ height: '95vh', overflowY: 'scroll', display: 'flex', flexDirection: 'column' }}>
         <div className="hero is-medium is-success" style={{backgroundImage: `url(${MarketPlaceHero})`, backgroundPosition: 'center', backgroundSize: 'cover'}}>
           <div className="hero-body">
-            <div className="container">
-              <h1 className="title is-1 has-text-centered has-text-black">Welcome to the Marketplace</h1>
-              <h2 className="subtitle is-4 has-text-centered has-text-black">Explore over 8000 playing cards and collections</h2>
+            <div className="container shadow-box">
+              <h1 className="title is-1 has-text-centered light-text-title">Welcome to the Marketplace</h1>
+              <h2 className="subtitle is-4 has-text-centered light-text-title">Explore over 8000 playing cards and collections</h2>
             </div>
           </div>
         </div>
         <section className="section" style={{ backgroundImage: `url(${MarketPlaceBackground})`, flexGrow: '1' }}>
           {userInfo &&
             <>
-            <div className="container">
-              <h3 className="subtitle is-4 has-text-centered">My Balance: ${userInfo.coins}</h3>
+            <div className="container shadow-box">
+              <h3 className="subtitle is-4 has-text-centered light-text-title">My Balance: ${userInfo.coins}</h3>
             </div>
             <br />
             </>
@@ -238,7 +238,7 @@ class MarketPlace extends React.Component {
                   </> 
                   : 
                   <>
-                  <h1 className="title is-1">Loading Cards...</h1>
+                  <h1 className="title is-1 light-text-title">Loading Cards...</h1>
                   <progress className="progress is-large is-success" max="100">60%</progress>
                   </>
                   }
@@ -268,7 +268,7 @@ class MarketPlace extends React.Component {
                   </>
                   :
                   <>
-                  <h1 className="title is-1">Loading Collections...</h1>
+                  <h1 className="title is-1 light-text-title">Loading Collections...</h1>
                   <progress className="progress is-large is-success" max="100">60%</progress>
                   </>
                   }

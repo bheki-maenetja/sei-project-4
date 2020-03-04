@@ -106,7 +106,7 @@ class MyProfile extends React.Component {
       <Navbar />
       <section className="section" style={{height: '95vh', overflowY: 'scroll', backgroundImage: `url(${ProfileBackground})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
         <div className="container">
-          <h1 className="title is-1 has-text-black">{userInfo.alias}</h1>
+          <h1 className="title is-1 light-text-title">{userInfo.alias}</h1>
           <hr />
           <div className="columns">
             <div className="column is-one-third">
@@ -120,24 +120,24 @@ class MyProfile extends React.Component {
                 <br />
                 <div className="level">
                   <div className="level-left" style={{width: 'fit-content', margin: '0'}}>
-                    <small>Coins: {userInfo.coins}</small>
+                    <p className="light-text-body">Money: W${userInfo.coins}</p>
                   </div>
                   <div className="level-right" style={{width: 'fit-content', margin: '0'}}>
-                    <small>Xp: {userInfo.xp}</small>
+                    <p className="light-text-body">Xp: {userInfo.xp}</p>
                   </div>
                 </div>
               </div>
             </div>
             <div className="column is-two-third">
               <div className="container is-fluid">
-                <h2 className="title is-3 has-text-black">Name</h2>
-                <h3 className="subtitle is-5 has-text-black">{userInfo.first_name} {userInfo.last_name}</h3>
+                <h2 className="title is-3 light-text-title">Name</h2>
+                <h3 className="subtitle is-5 light-text-body">{userInfo.first_name} {userInfo.last_name}</h3>
                 <hr />
-                <h2 className="title is-3 has-text-black">Email</h2>
-                <h3 className="subtitle is-5 has-text-black">{userInfo.email}</h3>
+                <h2 className="title is-3 light-text-title">Email</h2>
+                <h3 className="subtitle is-5 light-text-body">{userInfo.email}</h3>
                 <hr />
-                <h2 className="title is-3 has-text-black">Username</h2>
-                <h3 className="subtitle is-5 has-text-black">{userInfo.username}</h3>
+                <h2 className="title is-3 light-text-title">Username</h2>
+                <h3 className="subtitle is-5 light-text-body">{userInfo.username}</h3>
                 <hr />
               </div>
             </div>
