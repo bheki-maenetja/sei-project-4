@@ -26,7 +26,7 @@ class TitlePage extends React.Component {
                         </figure>
                       </div>
                       <div className="card-content">
-                        <h1 className="title is-2 has-text-black has-text-centered light-text-title">Login</h1>
+                        <h1 className="title is-2 has-text-centered light-text-title">Login</h1>
                       </div>
                     </div>
                   </Link>
@@ -36,11 +36,11 @@ class TitlePage extends React.Component {
                     <div className="card">
                       <div className="card-image">
                         <figure className="image is-square">
-                          <img src="https://cdn.clipart.email/2b8216f279ed063c3a02fe5ff9a7f5dc_royalty-free-proud-woman-clip-art-vector-images-illustrations-_612-395.jpeg" alt="Register" />
+                          <img src="https://d3dwwd0h9gl2qw.cloudfront.net/wp-content/uploads/2018/12/21122121/FNIMN-Superheroes-p06qx572.jpg" alt="Register" />
                         </figure>
                       </div>
                       <div className="card-content">
-                        <h1 className="title is-2 has-text-black has-text-centered light-text-title">Join Us</h1>
+                        <h1 className="title is-2 has-text-centered light-text-title">Join Us</h1>
                       </div>
                     </div>
                   </Link>
