@@ -10,7 +10,8 @@
 
 .light-text-body {
   color: white;
-  text-shadow: 1px 1px black;
+  text-shadow: 2px 2px black;
+  font-weight: 600;
 }
 
 .light-text-emphatic {
@@ -33,4 +34,22 @@
   border-radius: 10px;
   box-shadow: 0px 0px 10px 5px black;
   padding: 5px
+}
+
+.tabs .is-active {
+  background-color: rgba(0, 0, 0, 0.6);
+  border-left: 5px solid cyan;
+  border-top: 5px solid red;
+  border-right: 5px solid lime;
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+}
+
+.tabs li:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 10px 10px 0 0;
+}
+
+.card:hover {
+  cursor: pointer;
 }

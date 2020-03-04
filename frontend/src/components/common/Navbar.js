@@ -38,8 +38,8 @@ class Navbar extends React.Component {
           <div className={`navbar-menu ${navbarOpen ? 'is-active' : ''}`}>
             <div className="navbar-end">
               <Link className="navbar-item" to="/heroes">Heroes</Link>
-              <Link className="navbar-item" to="/hero-compare">Hero Compare</Link>
-              <Link className="navbar-item" to="/hero-battle">Hero Battle</Link>
+              <Link className="navbar-item" to="/hero-compare">Hero vs Hero</Link>
+              <Link className="navbar-item" to="/hero-battle">Superhero Battle</Link>
               <Link className="navbar-item" to="/marketplace">Marketplace</Link>
               <Link className="navbar-item" to="/my-profile">My Profile</Link>
               <Link className="navbar-item" to="/" onClick={this.logout}>Logout</Link>

@@ -74,7 +74,7 @@ class HeroCompare extends React.Component {
     return (
       <>
       <Navbar />
-      <section className="section" style={{ backgroundImage: `url(${HeroCompareBackground})`, backgroundPosition: 'center', backgroundSize: 'cover' , height: '95vh'}}>
+      <section className="section" style={{ backgroundImage: `url(${HeroCompareBackground})`, backgroundPosition: 'center', backgroundSize: 'cover' , height: '95vh', overflowY: 'scroll'}}>
         <div className="container">
           <div className="hero is-small shadow-box">
             <div className="hero-body">

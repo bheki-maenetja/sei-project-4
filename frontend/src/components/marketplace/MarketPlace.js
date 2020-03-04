@@ -192,7 +192,7 @@ class MarketPlace extends React.Component {
           {userInfo &&
             <>
             <div className="container shadow-box">
-              <h3 className="subtitle is-4 has-text-centered light-text-title">My Balance: ${userInfo.coins}</h3>
+              <h3 className="subtitle is-4 has-text-centered light-text-title">My Balance: W${userInfo.coins}</h3>
             </div>
             <br />
             </>
@@ -203,13 +203,17 @@ class MarketPlace extends React.Component {
                 <Tab></Tab>
                 <Tab></Tab>
               </TabList>
-              <div className="tabs is-centered is-large is-boxed is-fullwidth">
+              <div className="tabs is-centered is-large is-fullwidth">
                 <ul>
                   <li className={`${this.state.tabIndex === 0 ? 'is-active' : ''}`} onClick={() => this.changeTabs(0)}>
-                    <a href="#">Cards</a>
+                    <a href="#">
+                      <p className="light-text-title">Cards</p>
+                    </a>
                   </li>
                   <li className={`${this.state.tabIndex === 1 ? 'is-active' : ''}`} onClick={() => this.changeTabs(1)}>
-                    <a href="#">Card Collections</a>
+                    <a href="#">
+                      <p className="light-text-title">Card Collections</p>
+                    </a>
                   </li>
                 </ul>
               </div>

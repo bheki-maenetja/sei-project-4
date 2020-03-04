@@ -100,7 +100,6 @@ class MyProfile extends React.Component {
   render() {
     const { userInfo } = this.state
     if (!userInfo) return null
-    console.log(this.state.currentCollection)
     return (
       <>
       <Navbar />
@@ -118,7 +117,7 @@ class MyProfile extends React.Component {
                   margin: '0px auto'}}>
                 </figure>
                 <br />
-                <div className="level">
+                <div className="level shadow-box">
                   <div className="level-left" style={{width: 'fit-content', margin: '0'}}>
                     <p className="light-text-body">Money: W${userInfo.coins}</p>
                   </div>
@@ -150,21 +149,37 @@ class MyProfile extends React.Component {
               <Tab></Tab>
               <Tab></Tab>
             </TabList>
-            <div className="tabs is-centered is-large is-boxed is-fullwidth">
+            <div className="tabs is-centered is-large is-fullwidth">
             <ul>
               <li className={`${this.state.tabIndex === 0 ? 'is-active' : ''}`} onClick={() => this.setState({ tabIndex: 0 })}>
-                <a href="#">My Cards</a>
+                <a href="#">
+                  <p className="light-text-title">My Cards</p>
+                </a>
               </li>
               <li className={`${this.state.tabIndex === 1 ? 'is-active' : ''}`} onClick={() => this.setState({ tabIndex: 1 })}>
-                <a href="#">My Collections</a>
+                <a href="#">
+                  <p className="light-text-title">My Collections</p>
+                </a>
               </li>
             </ul>
           </div>
             <TabPanel>
-              {this.state.userCards.length !== 0 ? <UserCardIndex cardData={this.state.userCards} clickHandler={this.setCurrentCard} /> : <h1 className="subtitle is-6">No Cards yet. <Link to="/marketplace">Buy cards</Link></h1>}
+              {this.state.userCards.length !== 0 ? 
+                <UserCardIndex cardData={this.state.userCards} clickHandler={this.setCurrentCard} /> 
+                : 
+                <h1 className="subtitle is-3 light-text-title">
+                  No Cards yet. <Link to="/marketplace">Buy cards</Link>
+                </h1>
+                }
             </TabPanel>
             <TabPanel>
-              {this.state.userCards.length !== 0 ? <UserCollectionIndex collectionData={this.state.userCollections} clickHandler={this.setCurrentCollection} /> : <h1 className="subtitle is-6">No Collections yet. <Link to="/marketplace">Buy card packs</Link></h1>} 
+              {this.state.userCards.length !== 0 ? 
+                <UserCollectionIndex collectionData={this.state.userCollections} clickHandler={this.setCurrentCollection} /> 
+                : 
+                <h1 className="subtitle is-3 light-text-title">
+                  No Collections yet. <Link to="/marketplace">Buy card packs</Link>
+                </h1>
+                } 
             </TabPanel>
           </Tabs>
           {this.state.isModalOpen && 

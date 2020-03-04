@@ -60,7 +60,7 @@ class Home extends React.Component {
               <div className="hero-body">
                 <Link to="/hero-battle">
                   <div className="legend" style={{ backgroundColor: 'rgba(0,0,0, 0.5)', opacity: '1' }}>
-                    <h1 className="title is-2 has-text-white">Put your cards to the test in HERO BATTLE, the ultimate contest of champions!</h1>
+                    <h1 className="title is-2 has-text-white">Put your cards to the test in SUPERHERO BATTLE, the ultimate contest of champions!</h1>
                   </div>
                 </Link>
               </div>
