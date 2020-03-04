@@ -19,7 +19,7 @@ class UserCardIndex extends React.Component {
                       </figure>
                     </div>
                     <div className="card-content">
-                      <h1 className="title is-5 has-text-centered">{card.name}</h1>
+                      <h1 className="title is-5 has-text-centered light-text-title">{card.name}</h1>
                     </div>
                   </div>
                 </div>                

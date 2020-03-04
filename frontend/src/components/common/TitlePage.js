@@ -26,7 +26,7 @@ class TitlePage extends React.Component {
                         </figure>
                       </div>
                       <div className="card-content">
-                        <h1 className="title is-2 has-text-black has-text-centered">Login</h1>
+                        <h1 className="title is-2 has-text-black has-text-centered light-text-title">Login</h1>
                       </div>
                     </div>
                   </Link>
@@ -40,7 +40,7 @@ class TitlePage extends React.Component {
                         </figure>
                       </div>
                       <div className="card-content">
-                        <h1 className="title is-2 has-text-black has-text-centered">Join Us</h1>
+                        <h1 className="title is-2 has-text-black has-text-centered light-text-title">Join Us</h1>
                       </div>
                     </div>
                   </Link>

@@ -115,7 +115,7 @@ class HeroCompare extends React.Component {
                   </figure>
                 </div>
                 <div className="card-content">
-                  <h2 className="title is-2">{firstChoice.name}</h2>
+                  <h2 className="title is-2 has-text-centered light-text-title">{firstChoice.name}</h2>
                 </div>
               </div>
             </div>
@@ -143,7 +143,7 @@ class HeroCompare extends React.Component {
                   </figure>
                 </div>
                 <div className="card-content">
-                  <h2 className="title is-2">{secondChoice.name}</h2>
+                  <h2 className="title is-2 has-text-centered light-text-title">{secondChoice.name}</h2>
                 </div>
               </div>
             </div>

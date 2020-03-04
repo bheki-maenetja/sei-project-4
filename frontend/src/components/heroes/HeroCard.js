@@ -11,7 +11,7 @@ const HeroCard = ({ name, image_url, id }) => (
           </figure>
         </div>
         <div className="card-content">
-          <h1 className="title is-5 has-text-centered">{name}</h1>
+          <h1 className="title is-5 has-text-centered light-text-title">{name}</h1>
         </div>
       </div>
     </Link>

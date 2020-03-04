@@ -52,4 +52,17 @@
 
 .card:hover {
   cursor: pointer;
+  box-shadow: 0px 0px 10px 2px black;
+  font-style: italic;
+  text-transform: uppercase;
+}
+
+.card {
+  border-radius: 0 0 20px 20px;
+  background-color: black;
+}
+
+.card > .card-content {
+  border-radius: 0 0 20px 20px;
+  background-color: dodgerblue;
 }

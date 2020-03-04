@@ -274,7 +274,7 @@ class HeroBattle extends React.Component {
                       </figure>
                     </div>
                     <div className="card-content">
-                      <h2 className="title is-3">{playerChoice.name}</h2>
+                      <h2 className="title is-3 has-text-centered light-text-title">{playerChoice.name}</h2>
                     </div>
                   </div>
                 </>
@@ -319,7 +319,7 @@ class HeroBattle extends React.Component {
                       </figure>
                     </div>
                     <div className="card-content">
-                      <h2 className="title is-3">{compChoice ? compChoice.name : 'Computer Choice'}</h2>
+                      <h2 className="title is-3 has-text-centered light-text-title">{compChoice ? compChoice.name : 'Computer Choice'}</h2>
                     </div>
                   </div>
                   </>             

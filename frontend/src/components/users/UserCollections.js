@@ -19,7 +19,7 @@ class UserCollectionIndex extends React.Component {
                       </figure>
                     </div>
                     <div className="card-content">
-                      <h1 className="title is-5 has-text-centered">{collection.name}</h1>
+                      <h1 className="title is-5 has-text-centered light-text-title">{collection.name}</h1>
                     </div>
                   </div>
                 </div>                
