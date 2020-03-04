@@ -76,8 +76,15 @@ class HeroCompare extends React.Component {
       <Navbar />
       <section className="section" style={{ backgroundImage: `url(${HeroCompareBackground})`, backgroundPosition: 'center', backgroundSize: 'cover' , height: '95vh'}}>
         <div className="container">
-          <h1 className="title is-1 has-text-centered has-text-white">Compare Your Favourite Superheroes!!!</h1>
-          <hr/>
+          <div className="hero is-small is-dark">
+            <div className="hero-body">
+              <div className="container">
+                <h1 className="title is-1 has-text-centered has-text-white">HERO VS HERO</h1>
+                <h2 className="subtitle is-5 has-text-centered has-text-white">Find out who would win in a fight between two of your favourite superheroes</h2>
+              </div>
+            </div>
+          </div>
+          <hr />
           <div className="container has-text-centered">
             {!this.state.gameInPlay ? <button className="button is-info" onClick={this.findWinner}>Find the Winner</button> : <button className="button is-danger" onClick={this.resetPage}>Reset</button>}
           </div>

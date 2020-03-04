@@ -32,6 +32,15 @@ class HeroIndex extends React.Component {
       <Navbar />
       <section className="section" style={{ height: '95vh', overflowY: 'scroll', backgroundImage: `url(${IndexBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <div className="container">
+          <div className="hero is-small is-dark">
+            <div className="hero-body">
+              <div className="container">
+                <h1 className="title is-1 has-text-centered has-text-white">THE HERO DIRECTORY</h1>
+                <h2 className="subtitle is-5 has-text-centered has-text-white">Find out more about all your favourite heroes</h2>
+              </div>
+            </div>
+          </div>
+          <hr />
           <form>
             <div className="field has-addons">
               <div className="control is-expanded">

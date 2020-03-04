@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 import Authorize from '../../lib/authorize'
 
@@ -209,7 +210,18 @@ class HeroBattle extends React.Component {
   }
 
   render() {
-    if (!this.state.playerChoice) return false
+    if (!this.state.playerChoice) {
+      return (
+        <>
+          <Navbar />
+          <div className="hero is-warning is-fullheight-with-navbar">
+            <div className="hero-body">
+              <h1 className="title is-1 has-text-centered">You don't have any cards! You can buy playing cards at the <Link to="/marketplace">Marketplace</Link></h1>
+            </div>
+          </div>
+        </>
+      )
+    }
     const { playerChoice, playerCards, gameInPlay, chosenChallenge, compChoice, winner, isModalOpen } = this.state
     return (
       <>

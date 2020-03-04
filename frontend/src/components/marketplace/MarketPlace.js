@@ -85,6 +85,14 @@ class MarketPlace extends React.Component {
   }
 
   buyCurrentCard = async (cardId) => {
+    
+    const { userInfo, currentCard } = this.state
+
+    if (userInfo.coins < currentCard.price) {
+      alert('You can\'t afford that mate!')
+      return
+    }
+
     try {
       await axios.get(`/api/cards/${cardId}/buy/`, {
         headers: {
@@ -109,6 +117,14 @@ class MarketPlace extends React.Component {
   }
 
   buyCurrentCollection = async (collId) => {
+
+    const { userInfo, currentCollection } = this.state
+
+    if (userInfo.coins < currentCollection.value) {
+      alert('You can\'t afford that mate!')
+      return
+    }
+
     try {
       await axios.get(`/api/collections/${collId}/buy/`, {
         headers: {
