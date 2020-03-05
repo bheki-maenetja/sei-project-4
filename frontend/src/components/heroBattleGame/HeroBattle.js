@@ -61,7 +61,9 @@ class HeroBattle extends React.Component {
   async componentDidMount() {
     try {
       const res = await Promise.all([
-        axios.get('/api/cards/'),
+        axios.get('/api/cards/', {
+          timeout: 100000
+        }),
         axios.get('/api/users/my-profile/', {
           headers: {
             Authorization: `Bearer ${Authorize.getToken()}`
@@ -85,7 +87,9 @@ class HeroBattle extends React.Component {
   refreshGame = async () => {
     try {
       const res = await Promise.all([
-        axios.get('/api/cards/'),
+        axios.get('/api/cards/', {
+          timeout: 100000
+        }),
         axios.get('/api/users/my-profile/', {
           headers: {
             Authorization: `Bearer ${Authorize.getToken()}`
