@@ -4,15 +4,8 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-pylint = "*"
 
 [packages]
-django = "==2.2.9"
-psycopg2-binary = "*"
-djangorestframework = "*"
-pyjwt = "*"
-django-cors-headers = "*"
-requests = "*"
 django-heroku = "*"
 
 [requires]

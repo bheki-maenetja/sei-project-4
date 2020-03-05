@@ -100,51 +100,223 @@
   "pk": 5,
   "fields": {
     "name": "The Avengers",
-    "image": "avenge.jpg",
-    "value": 0,
-    "avg_overall": 0,
-    "owner": 1,
-    "avg_level": 1,
-    "price_bracket": 4
+    "image": "https://pmcvariety.files.wordpress.com/2016/11/avengers.jpg?w=1000",
+    "value": 4456,
+    "avg_overall": 73,
+    "owner": 3,
+    "avg_level": 4,
+    "price_bracket": 4,
+    "cards": [
+      1160,
+      6130,
+      885,
+      85,
+      925
+    ]
   }
 },
 {
   "model": "cardCollections.cardcollection",
-  "pk": 6,
+  "pk": 9,
   "fields": {
     "name": "The Justice League",
-    "image": "justice.png",
-    "value": 0,
-    "avg_overall": 0,
+    "image": "https://cdn2us.denofgeek.com/sites/denofgeekus/files/styles/main_wide/public/2018/12/justice-league-2-story-predictions-theories.jpg?itok=SbELou66",
+    "value": 6460,
+    "avg_overall": 78,
     "owner": 1,
-    "avg_level": 5,
-    "price_bracket": 5
+    "avg_level": 4,
+    "price_bracket": 4,
+    "cards": [
+      80,
+      3025,
+      245,
+      665,
+      90,
+      2105
+    ]
   }
 },
 {
   "model": "cardCollections.cardcollection",
-  "pk": 7,
+  "pk": 10,
   "fields": {
-    "name": "Guardians of the Galaxy",
-    "image": "quill.gif",
-    "value": 0,
-    "avg_overall": 0,
+    "name": "The Guardians of the Galaxy",
+    "image": "https://cnet4.cbsistatic.com/img/7BtqqbUI6LbP7B2TgaHzC76zJtQ=/1092x0/2019/07/22/5fcdb86d-4e4e-469a-8c2a-606dde8eb8bb/guardians-of-the-galaxy-2-poster.jpg",
+    "value": 3156,
+    "avg_overall": 56,
     "owner": 1,
-    "avg_level": 6,
-    "price_bracket": 1
+    "avg_level": 3,
+    "price_bracket": 3,
+    "cards": [
+      2725,
+      6630,
+      525,
+      815,
+      4135
+    ]
   }
 },
 {
   "model": "cardCollections.cardcollection",
-  "pk": 8,
+  "pk": 11,
   "fields": {
-    "name": "The Suicide Squad",
-    "image": "suicide.lp",
-    "value": 0,
-    "avg_overall": 0,
+    "name": "Titanic Doom",
+    "image": "https://static0.cbrimages.com/wordpress/wp-content/uploads/2018/05/thanos-v-darkseid.jpg",
+    "value": 4492,
+    "avg_overall": 87,
     "owner": 1,
-    "avg_level": 6,
-    "price_bracket": 1
+    "avg_level": 4,
+    "price_bracket": 4,
+    "cards": [
+      1065,
+      155,
+      20,
+      455
+    ]
+  }
+},
+{
+  "model": "cardCollections.cardcollection",
+  "pk": 12,
+  "fields": {
+    "name": "Wonderfully Marvelous",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT508VgKshXecP6VfhWOQyWOgafLLAwLQor9WR0qs-uUmL8PXel",
+    "value": 3692,
+    "avg_overall": 87,
+    "owner": 1,
+    "avg_level": 4,
+    "price_bracket": 5,
+    "cards": [
+      635,
+      89,
+      185
+    ]
+  }
+},
+{
+  "model": "cardCollections.cardcollection",
+  "pk": 13,
+  "fields": {
+    "name": "The Gotham Ensemble",
+    "image": "https://external-preview.redd.it/vKBs7pAh6lnLAmu15gM0kquQkW0cVscICyCC7RymnsE.jpg?auto=webp&s=0135644fd7e6ea1362bf7f53fa1bb942c1495fef",
+    "value": 2600,
+    "avg_overall": 42,
+    "owner": 1,
+    "avg_level": 2,
+    "price_bracket": 2,
+    "cards": [
+      7520,
+      7400,
+      7660,
+      1370,
+      3024,
+      8115,
+      8215,
+      3290
+    ]
+  }
+},
+{
+  "model": "cardCollections.cardcollection",
+  "pk": 14,
+  "fields": {
+    "name": "The Fantastic Four",
+    "image": "https://s3.amazonaws.com/prod-media.gameinformer.com/styles/full/s3/2019/07/30/f4e0d6df/f4.jpg",
+    "value": 1596,
+    "avg_overall": 57,
+    "owner": 3,
+    "avg_level": 3,
+    "price_bracket": 2,
+    "cards": [
+      4720,
+      1940,
+      5175,
+      7095
+    ]
+  }
+},
+{
+  "model": "cardCollections.cardcollection",
+  "pk": 15,
+  "fields": {
+    "name": "The Asgardian Royal Family",
+    "image": "https://vignette.wikia.nocookie.net/marveldatabase/images/7/77/Thor_Asgard%27s_Avenger_Vol_1_1_Textless.jpg/revision/latest?cb=20160710062155",
+    "value": 6684,
+    "avg_overall": 81,
+    "owner": 1,
+    "avg_level": 4,
+    "price_bracket": 4,
+    "cards": [
+      545,
+      615,
+      275,
+      84,
+      345,
+      634
+    ]
+  }
+},
+{
+  "model": "cardCollections.cardcollection",
+  "pk": 16,
+  "fields": {
+    "name": "Men on a Mission",
+    "image": "https://www.moviedash.com/wp-content/uploads/2018/08/Spy-films.jpg",
+    "value": 1528,
+    "avg_overall": 37,
+    "owner": 1,
+    "avg_level": 2,
+    "price_bracket": 2,
+    "cards": [
+      8164,
+      6270,
+      7345,
+      6810,
+      5370,
+      6010
+    ]
+  }
+},
+{
+  "model": "cardCollections.cardcollection",
+  "pk": 17,
+  "fields": {
+    "name": "Live Long and Prosper",
+    "image": "https://www.syfy.com/sites/syfy/files/styles/1200x680/public/wire/legacy/star-trek-original-series-season-2.jpg",
+    "value": 2352,
+    "avg_overall": 43,
+    "owner": 1,
+    "avg_level": 2,
+    "price_bracket": 2,
+    "cards": [
+      6310,
+      5770,
+      6955,
+      7155,
+      2455,
+      1310
+    ]
+  }
+},
+{
+  "model": "cardCollections.cardcollection",
+  "pk": 18,
+  "fields": {
+    "name": "Strong with the Force",
+    "image": "https://cdn.mos.cms.futurecdn.net/YdAaqJNxhLZ66zmRZ3T58D.jpg",
+    "value": 3108,
+    "avg_overall": 57,
+    "owner": 1,
+    "avg_level": 3,
+    "price_bracket": 3,
+    "cards": [
+      3850,
+      3915,
+      1295,
+      2995,
+      2710,
+      4670
+    ]
   }
 }
 ]

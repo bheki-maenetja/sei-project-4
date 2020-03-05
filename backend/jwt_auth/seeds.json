@@ -1,0 +1,112 @@
+[
+{
+  "model": "jwt_auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$XsSRBQ4Oj1sE$JtMeI5Ik+60YSjE+V+2fGsc59kcvXDgvyK7spyas5iI=",
+    "last_login": "2020-02-27T17:50:53.201Z",
+    "is_superuser": true,
+    "username": "admin",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2020-02-27T17:49:13.546Z",
+    "first_name": "",
+    "last_name": "",
+    "alias": "",
+    "email": "admin@email.com",
+    "profile_image": "",
+    "coins": 0,
+    "xp": 0,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "jwt_auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$uHY9oOIDu4Mc$00KU8CBd2Uw050xSvAfS+1GCc5e6dkSOMnOMt4XwKoA=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "user1",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-02-28T09:14:21Z",
+    "first_name": "user",
+    "last_name": "1",
+    "alias": "Thundercat",
+    "email": "user1@email.com",
+    "profile_image": "https://home.bt.com/images/superhero-fan-travel-bucket-list-136420572488803901-170822142249.jpg",
+    "coins": 1814,
+    "xp": 500,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "jwt_auth.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$XHSJARJgAel5$3E42mqG0r2B60/IRYP9ZgDEHydEiqRXnii5keBX+G6k=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "user2",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-02-29T15:24:17.262Z",
+    "first_name": "user2",
+    "last_name": "two",
+    "alias": "Bingpot!",
+    "email": "user2@email.com",
+    "profile_image": "http://res.cloudinary.com/dyed10v2u/image/upload/v1582989840/upload_demo/vpftc4u6nfbqcqk0dl8s.jpg",
+    "coins": 500,
+    "xp": 0,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "jwt_auth.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$KJXC5M8kowfp$Dl4+HJsTcLkrmzXDhM73yuTM1Ee9jp5j++Kubb070Us=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "bheki-20",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-03-04T10:48:16.736Z",
+    "first_name": "Bheki",
+    "last_name": "Maenetja",
+    "alias": "Velvet Thunder",
+    "email": "bheki@email.com",
+    "profile_image": "http://res.cloudinary.com/dyed10v2u/image/upload/v1583318796/upload_demo/wbmhgfkwoyha7t2dywyl.jpg",
+    "coins": 1085,
+    "xp": 250,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "jwt_auth.user",
+  "pk": 7,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$UgDeOrqcX79p$kCgR4MQ7+HLtZVb95jUKi/3BtWgNufRrXLcpXHSCjww=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "astara303",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-03-04T15:46:46.670Z",
+    "first_name": "astara",
+    "last_name": "cambata",
+    "alias": "BADBITCH",
+    "email": "astara@email.com",
+    "profile_image": "http://res.cloudinary.com/dyed10v2u/image/upload/v1583336794/upload_demo/krzjvhzpwnasd4n4cs2c.jpg",
+    "coins": 500,
+    "xp": 0,
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
