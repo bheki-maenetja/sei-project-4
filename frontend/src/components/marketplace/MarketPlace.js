@@ -30,7 +30,9 @@ class MarketPlace extends React.Component {
   async componentDidMount() {
     try {
       const res = await Promise.all([
-        axios.get('/api/cards/'),
+        axios.get('/api/cards/', {
+          timeout: 100000
+        }),
         axios.get('/api/collections/'),
         axios.get('/api/users/my-profile', {
           headers: {
@@ -55,7 +57,9 @@ class MarketPlace extends React.Component {
   refreshMarket = async () => {
     try {
       const res = await Promise.all([
-        axios.get('/api/cards/'),
+        axios.get('/api/cards/', {
+          timeout: 100000
+        }),
         axios.get('/api/collections/'),
         axios.get('/api/users/my-profile', {
           headers: {
