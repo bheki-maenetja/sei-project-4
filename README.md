@@ -29,14 +29,14 @@ My fourth and final project for the General Assembly Software Engineering Immers
 This project is a superhero information website. Users can search for their favourite superheroes (or supervillains) and find a wealth of information about their origins, connections, occupations and so much more. The site also includes a nifty comparison tool that allows users to compare the power stats of different superheroes. Additionally, the site also features a top-trumps-style card game where users can compare the power stats of their cards against other users and win prizes in the process. Cards (as well as card collections) can be purchased at the marketplace.
 
 <figcaption>Home Page</figcation>
-![](frontend/src/assets/screenshot-homePage.gif)
+<img src="frontend/src/assets/screenshot-homePage.gif" width="100%" />
 
 <figcaption>Suphero Battle</figcaption>
-![](frontend/src/assets/screenshot-heroBattle.gif)
+<img src="frontend/src/assets/screenshot-heroBattle.gif" width="100%" />
 
 <figcaption>The Marketplace</figcation>
-![](frontend/src/assets/screenshot-markplacePage.gif)
+<img src="frontend/src/assets/screenshot-markplacePage.gif" width="100%" />
 
 <figcaption>A User's Profile Page</figcation>
-![](frontend/src/assets/screenshot-profilePage.png)
+<img src="frontend/src/assets/screenshot-profilePage.png" width="100%" />
 
