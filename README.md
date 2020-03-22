@@ -381,6 +381,17 @@ class ManyCards(APIView):
     return Response(new_card.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 ```
 
+## Reflection
+### Challenges
+- **Model relationships:** there are number of relationships between models in the database. The user model has relationships with the models for cards and card collections. Cards, in turn, have relationships with card collections, power levels, price brackets and heroes. Model relationships became even more complicated when implementing functionality for the purchase and sale of cards/collections. Implementing all these relationships was a laborious task.
+- **Authenticated API requests:** in the website certain API requests require the token that a user is given when they log in to the site; e.g. buying and selling cards. These requests work perfectly when made from a REST client such as Insomnia. However, when made from a browser the requests return a 403 error. It took me a while to figure out that the backend was not receiving the user's token in the correct format.
+
+### Room for Improvement
+- **Design & Styling:** there are a few layouting issues on the marketplace and superhero battle pages. Overall, the styling can be improved with a more focused colour palette and perhaps a few animations. The responsive design of the site also needs work.
+- **Request Timeouts:** on the deployed version of the site, user's are unable to access the marketplace and the card game. The sheer number of cards that need to be pulled from the database (over 8000) means that the necessary data for the marketplace and card game cannot be accessed before the request times out. There are a number of possible fixes including limiting the number cards that are pulled in a request or pulling cards by category instead of all at once.
+
+## Future Features
+- **Super Teams:** as was the case in [sei-project-2](https://github.com/bheki-maenetja/sei-project-2), one MVP feature that I couldn't quite get to in the given time frame was Super Teams. This would've been an extension of the superhero comparision tool. Users would be able to assemble teams of heroes and compare their cumulative powerstats against one another. This would've also been included in Superhero Battle; users would be able to duel with multiple cards at once.
 
 
 
