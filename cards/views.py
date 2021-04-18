@@ -1,4 +1,5 @@
 # pylint: disable=no-member
+from random import shuffle, choices
 import json
 import requests
 from django.shortcuts import render
@@ -153,7 +154,7 @@ class SellSingleCard(APIView):
 class ManyCards(APIView):
 
   def get(self, _request):
-    my_cards = PlayingCard.objects.all()
+    my_cards = PlayingCard.objects.order_by("?")[:1000]
     serial_cards = PopulatedCardSerializer(my_cards, many=True)
     return Response(serial_cards.data, status=HTTP_200_OK)
   
