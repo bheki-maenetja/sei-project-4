@@ -154,7 +154,7 @@ class SellSingleCard(APIView):
 class ManyCards(APIView):
 
   def get(self, _request):
-    my_cards = PlayingCard.objects.order_by("?")[:1000]
+    my_cards = PlayingCard.objects.order_by("?")[:100]
     serial_cards = PopulatedCardSerializer(my_cards, many=True)
     return Response(serial_cards.data, status=HTTP_200_OK)
   
