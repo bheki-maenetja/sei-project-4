@@ -7,7 +7,7 @@ verify_ssl = true
 pylint = "*"
 
 [packages]
-django = "==2.2.26"
+django = "==2.2.27"
 psycopg2-binary = "*"
 djangorestframework = "*"
 pyjwt = "*"
