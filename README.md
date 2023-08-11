@@ -22,7 +22,7 @@ My fourth and final project for the General Assembly Software Engineering Immers
 - Bulma CSS Framework
 - Yarn
 - Axios
-* Third-party APIs
+- Third-party APIs
   * [SuperHero API](https://akabab.github.io/superhero-api/api/)
 
 ## Overview
