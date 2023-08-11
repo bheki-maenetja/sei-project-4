@@ -9,7 +9,7 @@ My fourth and final project for the General Assembly Software Engineering Immers
 - To view the site locally run the terminal command `python manage.py runserver` and navigate to localhost:8000 in your browser
 
 ### Deployment
-- You can view a deployed version of the site [here](https://my-superhero-app-v2.herokuapp.com/)
+- You can view a deployed version of the site [here](https://my-superhero-app-v2-0c54f1a4b562.herokuapp.com/)
 
 ## Technologies Used
 - Python 3
